@@ -8,7 +8,7 @@ const User = require('../models/user');
 
 
 // ---- GET ----
-// 내 정보(Angular에서 쓰임)
+// 토큰에 해당하는 사용자 정보 반환(Angular에 쓰일 것, Bearer 토큰)
 router.get('/profile', passport.authenticate("jwt", { session: false }), (req, res, next) => {
     res.json({
         user: {
@@ -62,7 +62,8 @@ router.post('/authenticate', (req, res) => {
                     nickname: user.nickname,
                     username: user.username
                 }
-                const token = jwt.sign({ data: tokenUser }, config.secret, { expiresIn: 36000 });
+                //토큰 만료까지 1시간
+                const token = jwt.sign({ data: tokenUser }, config.secret, { expiresIn: 3600 });
                 res.json({
                     success: true,
                     token: token,

@@ -47,7 +47,7 @@ mongoose.connect(dbConfig.db);
 mongoose.connection.on('connected', () => {
     console.log('mongodb connected');
 });
-// 몽고DB 에러
+// 몽고DB 에러 처리
 mongoose.connection.on('error', (err) => {
     console.log('mongodb error');
 });

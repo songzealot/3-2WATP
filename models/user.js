@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-//const config = require('../config/database');
+// const config = require('../config/database');
 
 // user 모델 정의
 const UserSchema = mongoose.Schema({
@@ -8,7 +8,7 @@ const UserSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    //로그인 ID
+    // 로그인 ID
     username: {
         type: String,
         required: true
@@ -27,17 +27,21 @@ const UserSchema = mongoose.Schema({
     }
 });
 
+// 몽고DB User 모델 생성
 const User = mongoose.model('User', UserSchema);
 
+// 몽고DB 데이터 id로 찾기
 User.getUserById = function (id, callback) {
     User.findById(id, callback)
 }
 
+// 몽고DB username으로 찾기
 User.getUserByUsername = function (username, callback) {
     const query = { username: username };
     User.findOne(query, callback);
 }
 
+// 몽고DB에 유저 계정 데이터 추가
 User.addUser = function (newUser, callback) {
     bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
@@ -51,6 +55,7 @@ User.addUser = function (newUser, callback) {
     });
 }
 
+// 비밀번호 해시 비교
 User.comparePassword = function (candidatePassword, hash, callback) {
     bcrypt.compare(candidatePassword, hash, (err, isMatch) => {
         if (err) throw (err);
