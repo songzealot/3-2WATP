@@ -7,7 +7,7 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     // 변수 선언 시 초기 값 지정 요구 해제
-    "strictPropertyInitialization":false,
+    "strictPropertyInitialization": false,
     "noImplicitReturns": true,
     // 변수 타입 지정 완화
     "noImplicitAny": false,
