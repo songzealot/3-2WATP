@@ -48,8 +48,3 @@ mongoose.connection.on("connected", () => {
 mongoose.connection.on("error", (err) => {
   console.log("mongodb error");
 });
-
-// 주석숮섲자서저시ㅓㅁㄴㅇ라ㅣㅁ
-// jujuj
-// ehdals
-// ㅂㅈㄷㅂㅈㄷㅂㅈㄱㅈㄷㄱ
