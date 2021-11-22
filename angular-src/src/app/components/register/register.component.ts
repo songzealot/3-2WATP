@@ -13,7 +13,7 @@ export class RegisterComponent implements OnInit {
   username: string;
   password: string;
   passwordCheck: string;
-  age: number;
+  age: string;
   gender: string;
 
   constructor(
