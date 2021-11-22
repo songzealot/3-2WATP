@@ -10,6 +10,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
 import { ValidateService } from './services/validate.service';
 import { FlashMessagesModule, FlashMessagesService } from 'angular2-flash-messages';
+import { HttpClientModule } from '@angular/common/http'
 
 @NgModule({
   declarations: [
@@ -26,7 +27,9 @@ import { FlashMessagesModule, FlashMessagesService } from 'angular2-flash-messag
     // 사용자 폼 입력 처리하기 위해 등록
     FormsModule,
     // flash message
-    FlashMessagesModule
+    FlashMessagesModule,
+    // http 모듈
+    HttpClientModule
   ],
   providers: [
     // ---- 서비스 추가 ----
