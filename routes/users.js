@@ -55,7 +55,10 @@ router.post('/authenticate', (req, res) => {
             return res.json({ success: false, msg: '존재하지 않는 유저' });
         }
         User.comparePassword(password, user.password, (err, isMatch) => {
-            if (err) throw err;
+            if (err) {
+                console.log(err);
+                return res.json({ success: false, msg: '로그인 오류 발생' });
+            }
             if (isMatch) {
                 let tokenUser = {
                     _id: user._id,
@@ -67,7 +70,8 @@ router.post('/authenticate', (req, res) => {
                 res.json({
                     success: true,
                     token: token,
-                    user: tokenUser
+                    user: tokenUser,
+                    msg: "로그인 성공"
                 });
             } else {
                 return res.json({ success: false, msg: '잘못된 비밀번호' });

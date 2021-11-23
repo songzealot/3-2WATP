@@ -12,7 +12,7 @@ export class ValidateService {
     if (user.username == undefined || user.username == '') {
       return { success: false, msg: "ID를 입력하세요." }
     } else if (user.password == undefined || user.password == '') {
-      return { success: false, msg: "패스워드를 입력하세요." }
+      return { success: false, msg: "비밀번호를 입력하세요." }
     } else if (user.password != passwordCheck) {
       return { success: false, msg: "재입력 비밀번호가 일치하지 않습니다." }
     } else if (user.nickname == undefined || user.nickname == '') {
@@ -23,6 +23,16 @@ export class ValidateService {
       return { success: false, msg: "나이를 선택하세요." }
     } else {
       return { success: true, msg: "입력값 유효성 확인" }
+    }
+  }
+
+  validateLogin(login) {
+    if (login.username == undefined || login.username == '') {
+      return ({ success: false, msg: "ID를 입력하세요." });
+    } else if (login.password == undefined || login.password == '') {
+      return ({ success: false, msg: "비밀번호를 입력하세요." })
+    } else {
+      return ({ success: true, msg: "로그인 성공" });
     }
   }
 }
