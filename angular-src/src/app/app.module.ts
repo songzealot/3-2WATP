@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { ValidateService } from './services/validate.service';
 import { FlashMessagesModule, FlashMessagesService } from 'angular2-flash-messages';
 import { HttpClientModule } from '@angular/common/http'
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { HttpClientModule } from '@angular/common/http'
     // register 페이지 입력값 검증
     ValidateService,
     // flash message
-    FlashMessagesService
+    FlashMessagesService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

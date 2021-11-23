@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { AuthService } from 'src/app/services/auth.service';
 import { ValidateService } from 'src/app/services/validate.service';
 
 @Component({
@@ -19,7 +21,9 @@ export class RegisterComponent implements OnInit {
   constructor(
     // ---- 서비스 등록 ----
     private validateService: ValidateService,
-    private flashMessage: FlashMessagesService
+    private flashMessage: FlashMessagesService,
+    private authService: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -30,15 +34,23 @@ export class RegisterComponent implements OnInit {
       nickname: this.nickname,
       username: this.username,
       password: this.password,
-      passwordCheck: this.passwordCheck,
       age: this.age,
       gender: this.gender
     }
     console.log(user);
-    const result = this.validateService.validateRegister(user);
+    const result = this.validateService.validateRegister(user, this.passwordCheck);
     if (result.success == false) {
       this.flashMessage.show(result.msg, { cssClass: 'alert-danger', timeout: 3000 });
-      return false;
+    } else {
+      this.authService.registerUser(user).subscribe((data) => {
+        if (data.success) {
+          this.flashMessage.show(data.msg, { cssClass: 'alert-success', timeout: 3000 });
+          this.router.navigate(['/login']);
+        } else {
+          this.flashMessage.show(data.msg, { cssClass: 'alert-danger', timeout: 3000 });
+          this.router.navigate(['/register']);
+        }
+      });
     }
   }
 }
