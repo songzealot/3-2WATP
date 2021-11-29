@@ -41,6 +41,9 @@
                 </li>
                 <!-- 로그인한 상태 -->
                 <li class="nav-item" *ngIf="checkLoggedIn()">
+                    <a class="nav-link" routerLink='/profile'>내 정보</a>
+                </li>
+                <li class="nav-item" *ngIf="checkLoggedIn()">
                     <a class="nav-link" (click)="logout()" style="cursor:pointer;">로그아웃</a>
                 </li>
             </ul>

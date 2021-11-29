@@ -13,7 +13,9 @@ router.get('/profile', passport.authenticate("jwt", { session: false }), (req, r
     res.json({
         user: {
             nickname: req.user.nickname,
-            username: req.user.username
+            username: req.user.username,
+            age: req.user.age,
+            gender: req.user.gender
         }
     });
 });
@@ -79,5 +81,6 @@ router.post('/authenticate', (req, res) => {
         });
     });
 });
+
 
 module.exports = router;

@@ -13,6 +13,8 @@ import { FlashMessagesModule, FlashMessagesService } from 'angular2-flash-messag
 import { HttpClientModule } from '@angular/common/http'
 import { AuthService } from './services/auth.service';
 import { JwtModule } from '@auth0/angular-jwt';
+import { ProfileComponent } from './components/profile/profile.component';
+import { AuthGuard } from './etc/guards';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { JwtModule } from '@auth0/angular-jwt';
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    NavbarComponent
+    NavbarComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,8 @@ import { JwtModule } from '@auth0/angular-jwt';
     ValidateService,
     // flash message
     FlashMessagesService,
-    AuthService
+    AuthService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
