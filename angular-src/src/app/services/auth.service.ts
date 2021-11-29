@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs';
 import { Login, User, UserLoginInfo } from '../models/user';
 
@@ -16,7 +17,10 @@ export class AuthService {
   authToken: any;
   user: User;
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    public jwtHelper: JwtHelperService
+  ) { }
 
   // 회원가입
   registerUser(user): Observable<any> {
@@ -34,5 +38,15 @@ export class AuthService {
   storeUserData(token: any, userLoginInfo: UserLoginInfo) {
     localStorage.setItem('authToken', token);
     localStorage.setItem('userLoginInfo', JSON.stringify(userLoginInfo));
+  }
+
+  logout() {
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('userInfo');
+  }
+
+  loggedIn(): boolean {
+    let authToken: any = localStorage.getItem('authToken');
+    return !this.jwtHelper.isTokenExpired(authToken);
   }
 }

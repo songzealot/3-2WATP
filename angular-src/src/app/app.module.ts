@@ -12,6 +12,7 @@ import { ValidateService } from './services/validate.service';
 import { FlashMessagesModule, FlashMessagesService } from 'angular2-flash-messages';
 import { HttpClientModule } from '@angular/common/http'
 import { AuthService } from './services/auth.service';
+import { JwtModule } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { AuthService } from './services/auth.service';
     // flash message
     FlashMessagesModule,
     // http 모듈
-    HttpClientModule
+    HttpClientModule,
+    JwtModule.forRoot({ config: { tokenGetter: () => { return localStorage.getItem('authToken'); } } })
   ],
   providers: [
     // ---- 서비스 추가 ----
