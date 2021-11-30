@@ -1,97 +1,108 @@
-<h1 class="page-header">회원가입</h1>
+<hr size="10px" />
+<br /><br /><br /><br />
+<h1 class="page-header" style="text-align: center">회원가입</h1>
+<br /><br /><br /><br />
+<hr size="10px" />
 
-<form (ngSubmit)="onRegisterSubmit()">
-    <div class="form-group">
-        <label for="inputUsername">ID</label>
-        <input type="text" id="inputUsername" [(ngModel)]="username" [ngModelOptions]="{ standalone: true }"
-            class="form-control">
+<section>
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card shadow-2-strong" style="border-radius: 1rem">
+          <div class="card-body p-5 text-center">
+            <form (ngSubmit)="onRegisterSubmit()">
+              <div class="form-group">
+                <label for="inputUsername">ID</label>
+                <input
+                  type="text"
+                  id="inputUsername"
+                  [(ngModel)]="username"
+                  [ngModelOptions]="{ standalone: true }"
+                  class="form-control"
+                />
+              </div>
+
+              <br />
+              <div class="form-group">
+                <label for="inputPassword">비밀번호</label>
+                <input
+                  type="password"
+                  id="inputPassword"
+                  [(ngModel)]="password"
+                  [ngModelOptions]="{ standalone: true }"
+                  class="form-control"
+                />
+              </div>
+
+              <br />
+
+              <div class="form-group">
+                <label for="inputPwchk">비밀번호 확인</label>
+                <input
+                  type="password"
+                  id="inputPwchk"
+                  [(ngModel)]="passwordCheck"
+                  [ngModelOptions]="{ standalone: true }"
+                  class="form-control"
+                />
+              </div>
+
+              <br />
+
+              <div class="form-group">
+                <label for="inputNickname">닉네임</label>
+                <input
+                  type="text"
+                  id="inputNickname"
+                  [(ngModel)]="nickname"
+                  [ngModelOptions]="{ standalone: true }"
+                  class="form-control"
+                />
+              </div>
+
+              <br />
+
+              <div>
+                성별
+                <div class="form-group">
+                  <select class="form-control input-sm" id="gender">
+                    <option style="text-align: center">
+                      -- Select your Gender --
+                    </option>
+                    <option>남</option>
+                    <option>여</option>
+                  </select>
+                </div>
+              </div>
+
+              <br />
+
+              <div>
+                나이
+                <div class="form-group">
+                  <select class="form-control input-sm" id="age">
+                    <option style="text-align: center">
+                      -- Select your Age --
+                    </option>
+                    <option>~19</option>
+                    <option>20~24</option>
+                    <option>25~29</option>
+                    <option>30~34</option>
+                    <option>35~39</option>
+                    <option>40~49</option>
+                    <option>50~59</option>
+                    <option>60~</option>
+                  </select>
+                </div>
+              </div>
+
+              <br />
+
+              <input type="submit" class="btn btn-primary" value="회원가입" />
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <div class="form-group">
-        <label for="inputPassword">비밀번호</label>
-        <input type="password" id="inputPassword" [(ngModel)]="password" [ngModelOptions]="{ standalone: true }"
-            class="form-control">
-    </div>
-
-    <div class="form-group">
-        <label for="inputPwchk">비밀번호 확인</label>
-        <input type="password" id="inputPwchk" [(ngModel)]="passwordCheck" [ngModelOptions]="{ standalone: true }"
-            class="form-control">
-    </div>
-
-    <div class="form-group">
-        <label for="inputNickname">닉네임</label>
-        <input type="text" id="inputNickname" [(ngModel)]="nickname" [ngModelOptions]="{ standalone: true }"
-            class="form-control">
-    </div>
-
-    <div>
-        성별
-        <div class="form-check">
-            <label>
-                <input class="form-check-input" type="radio" name="gender" value="남" [(ngModel)]="gender">
-                남
-            </label>
-        </div>
-
-        <div class="form-check">
-            <label>
-                <input class="form-check-input" type="radio" name="gender" value="여" [(ngModel)]="gender">
-                여
-            </label>
-        </div>
-    </div>
-    <div>
-        나이
-        <div class="form-check">
-            <label>
-                <input class="form-check-input" type="radio" name="age" value="~19" [(ngModel)]="age">
-                ~19
-            </label>
-        </div>
-        <div class="form-check">
-            <label>
-                <input class="form-check-input" type="radio" name="age" value="20~24" [(ngModel)]="age">
-                20~24
-            </label>
-        </div>
-        <div class="form-check">
-            <label>
-                <input class="form-check-input" type="radio" name="age" value="25~29" [(ngModel)]="age">
-                25~29
-            </label>
-        </div>
-        <div class="form-check">
-            <label>
-                <input class="form-check-input" type="radio" name="age" value="30~34" [(ngModel)]="age">
-                30~34
-            </label>
-        </div>
-        <div class="form-check">
-            <label>
-                <input class="form-check-input" type="radio" name="age" value="35~39" [(ngModel)]="age">
-                35~39
-            </label>
-        </div>
-        <div class="form-check">
-            <label>
-                <input class="form-check-input" type="radio" name="age" value="40~49" [(ngModel)]="age">
-                40~49
-            </label>
-        </div>
-        <div class="form-check">
-            <label>
-                <input class="form-check-input" type="radio" name="age" value="50~59" [(ngModel)]="age">
-                50~59
-            </label>
-        </div>
-        <div class="form-check">
-            <label>
-                <input class="form-check-input" type="radio" name="age" value="60~" [(ngModel)]="age">
-                60~
-            </label>
-        </div>
-
-    </div>
-    <input type="submit" class="btn btn-primary" value="회원가입">
-</form>
+  </div>
+</section>
