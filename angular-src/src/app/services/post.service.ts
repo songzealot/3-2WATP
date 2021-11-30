@@ -25,4 +25,9 @@ export class PostService {
     const registerUrl = this.prepEndPoint('articles/post_article');
     return this.http.post<any>(registerUrl, article, httpOptions);
   }
+
+  postView(_id): Observable<any> {
+    const registerUrl = this.prepEndPoint('posts/postView');
+    return this.http.post<any>(registerUrl, _id, httpOptions);
+  }
 }

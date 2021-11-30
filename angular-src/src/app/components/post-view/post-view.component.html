@@ -3,27 +3,22 @@
 <h2 class="pb-3 mb-4 font-italic border-bottom">게시글 열람</h2>
 
 <div class="card">
-  <div class="card-body">
-    <nav id="navbar-example2" class="navbar navbar-light bg-light px-3">
-      <a class="navbar-brand">제목 나오는 곳</a>
-      <ul class="nav nav-pills">
-        <li class="nav-item">&nbsp;작성자&nbsp;</li>
-        <li class="nav-item">&nbsp;날짜&nbsp;</li>
-        <li class="nav-item">&nbsp;조회수&nbsp;</li>
-      </ul>
-    </nav>
+    <div class="card-body">
+        <nav id="navbar-example2" class="navbar navbar-light bg-light px-3">
+            <a class="navbar-brand">{{title}}</a>
+            <ul class="nav nav-pills">
+                <li class="nav-item">&nbsp;{{reporter}}&nbsp;</li>
+                <li class="nav-item">&nbsp;{{post_date}}&nbsp;</li>
+                <li class="nav-item">&nbsp;{{view}}&nbsp;</li>
+            </ul>
+        </nav>
 
-    <br /><br />
+        <br /><br />
 
-    <div
-      data-bs-spy="scroll"
-      data-bs-target="#navbar-example2"
-      data-bs-offset="0"
-      class="scrollspy-example"
-      tabindex="0"
-    >
-      <h4>기사 제목</h4>
-      <p>기사 내용</p>
+        <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" class="scrollspy-example"
+            tabindex="0">
+            <h4>{{title}}</h4>
+            <p>{{contents}}</p>
+        </div>
     </div>
-  </div>
 </div>

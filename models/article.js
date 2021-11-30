@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const User = require('./user');
 
 const ArticleSchema = mongoose.Schema({
     post_date: {
@@ -43,9 +42,8 @@ const ArticleSchema = mongoose.Schema({
 
 const Article = mongoose.model('Article', ArticleSchema);
 
-Article.getAricleInfoById = function (id, callback) {
-    Article.findById(id, callback);
-}
+
+//Article.findById
 
 Article.addArticle = function (newArticle, callback) {
     newArticle.save(callback);
@@ -53,6 +51,10 @@ Article.addArticle = function (newArticle, callback) {
 
 Article.deleteArticle = function (article, callback) {
     Article.remove()
+}
+
+Article.viewArticle = function (id, callback) {
+
 }
 
 Article.test = function () { }

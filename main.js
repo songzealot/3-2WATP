@@ -4,7 +4,8 @@ const cors = require("cors");
 const passport = require("passport");
 const mongoose = require("mongoose");
 const users = require("./routes/users");
-const articles = require('./routes/articles')
+const articles = require('./routes/articles');
+const posts = require('./routes/posts');
 const dbConfig = require("./config/database");
 const { Passport } = require("passport");
 
@@ -38,6 +39,7 @@ require("./config/passport")(passport);
 // ---- 라우팅 ----
 app.use("/users", users);
 app.use('/articles', articles);
+app.use('/posts', posts);
 
 // ---- 몽고DB ----
 // 몽고DB 연결
