@@ -6,10 +6,9 @@ const Article = require('../models/article');
 
 
 router.post('/post_article', (req, res) => {
-    let date = new Date();
-
+    const post_date = new Date();
     const newArticle = new Article({
-        posst_date: req.body.post_date,
+        post_date: post_date,
         reporter: req.body.reporter,
         title: req.body.title,
         contents: req.body.contents,
@@ -32,3 +31,6 @@ router.post('/post_article', (req, res) => {
 router.post('/delete_article', (req, res) => {
 
 });
+
+
+module.exports = router;
