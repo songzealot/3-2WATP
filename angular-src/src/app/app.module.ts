@@ -17,6 +17,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { AuthGuard } from './etc/guards';
 import { NewsListComponent } from './components/news-list/news-list.component';
 import { NewPostComponent } from './components/new-post/new-post.component';
+import { PostViewComponent } from './components/post-view/post-view.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { NewPostComponent } from './components/new-post/new-post.component';
     NavbarComponent,
     ProfileComponent,
     NewsListComponent,
-    NewPostComponent
+    NewPostComponent,
+    PostViewComponent
   ],
   imports: [
     BrowserModule,
