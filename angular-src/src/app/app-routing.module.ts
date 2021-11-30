@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { NewPostComponent } from './components/new-post/new-post.component';
 import { NewsListComponent } from './components/news-list/news-list.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'navbar', component: NavbarComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
-  { path: 'news-list', component: NewsListComponent }
+  { path: 'news-list', component: NewsListComponent },
+  { path: 'newPost', component: NewPostComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

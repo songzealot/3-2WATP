@@ -16,6 +16,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AuthGuard } from './etc/guards';
 import { NewsListComponent } from './components/news-list/news-list.component';
+import { NewPostComponent } from './components/new-post/new-post.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { NewsListComponent } from './components/news-list/news-list.component';
     RegisterComponent,
     NavbarComponent,
     ProfileComponent,
-    NewsListComponent
+    NewsListComponent,
+    NewPostComponent
   ],
   imports: [
     BrowserModule,

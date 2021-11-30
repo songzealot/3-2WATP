@@ -14,7 +14,7 @@ const ArticleSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    content: {
+    contents: {
         type: String,
         required: true
     },
@@ -33,13 +33,18 @@ const ArticleSchema = mongoose.Schema({
     comment_count: {
         type: Number,
         required: true
+    },
+    newspaper_company: {
+        type: String,
+        required: true
     }
+
 });
 
 const Article = mongoose.model('Article', ArticleSchema);
 
 Article.getAricleInfoById = function (id, callback) {
-    Article.findById(d, callback)
+    Article.findById(id, callback);
 }
 
 Article.addArticle = function (newArticle, callback) {
