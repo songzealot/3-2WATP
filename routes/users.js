@@ -5,29 +5,35 @@ const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 
 const User = require('../models/user');
-const Article = require('../models/article');
-
-router.post('/article', (req, res) => {
-    const newArticle = new Article({
-        posst_date: req.body.post_date,
-        reporter: req.body.reporter,
-        title: req.body.title,
-        // 작업 중
-    })
-})
-
 
 // ---- GET ----
 // 토큰에 해당하는 사용자 정보 반환(Angular에 쓰일 것, Bearer 토큰)
 router.get('/profile', passport.authenticate("jwt", { session: false }), (req, res, next) => {
-    res.json({
-        user: {
-            nickname: req.user.nickname,
-            username: req.user.username,
-            age: req.user.age,
-            gender: req.user.gender
-        }
-    });
+
+
+    if (req.user.status == '기자') {
+        res.json({
+            user: {
+                nickname: req.user.nickname,
+                username: req.user.username,
+                age: req.user.age,
+                gender: req.user.gender,
+                status: req.user.status,
+                newspaper_company: req.user.newspaper_company
+            }
+        });
+    } else {
+        res.json({
+            user: {
+                nickname: req.user.nickname,
+                username: req.user.username,
+                age: req.user.age,
+                gender: req.user.gender,
+                status: req.user.status
+            }
+        });
+    }
+
 });
 
 // ---- POST ----
