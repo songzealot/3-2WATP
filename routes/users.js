@@ -5,6 +5,16 @@ const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 
 const User = require('../models/user');
+const Article = require('../models/article');
+
+router.post('/article', (req, res) => {
+    const newArticle = new Article({
+        posst_date: req.body.post_date,
+        reporter: req.body.reporter,
+        title: req.body.title,
+        // 작업 중
+    })
+})
 
 
 // ---- GET ----
