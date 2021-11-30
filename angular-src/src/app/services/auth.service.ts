@@ -58,6 +58,7 @@ export class AuthService {
     let authToken: any = localStorage.getItem('authToken');
     return !this.jwtHelper.isTokenExpired(authToken);
   }
+  //사용자 정보 가져오기
   getProfile(): Observable<any> {
     let authToken: any = localStorage.getItem('authToken');
     const httpOptionsP = {
@@ -69,6 +70,7 @@ export class AuthService {
     const profileUrl = this.prepEndPoint('users/profile');
     return this.http.get(profileUrl, httpOptionsP);
   }
+
 
 }
 

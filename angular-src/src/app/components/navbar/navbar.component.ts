@@ -14,6 +14,8 @@ export class NavbarComponent implements OnInit {
     private router: Router
   ) { }
 
+  status: string;
+
   ngOnInit(): void {
   }
 
@@ -25,4 +27,5 @@ export class NavbarComponent implements OnInit {
   checkLoggedIn(): boolean {
     return this.authService.loggedIn();
   }
+
 }

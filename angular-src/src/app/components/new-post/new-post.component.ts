@@ -25,13 +25,24 @@ export class NewPostComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // if (!this.authService.checkStatus()) {
+    //   this.flashMessage.show("잘못된 접근입니다.", { cssClass: 'alert-danger', timeout: 3000 });
+    //   this.router.navigate(['/']);
+    // }
+
     this.authService.getProfile().subscribe((profile) => {
-      this.reporter = profile.user.nickname;
-      this.newspaper_company = profile.user.newspaper_company;
+      if (profile.user.status != '기자') {
+        this.flashMessage.show("잘못된 접근입니다.", { cssClass: 'alert-danger', timeout: 3000 });
+        this.router.navigate(['/']);
+      } else {
+        this.reporter = profile.user.nickname;
+        this.newspaper_company = profile.user.newspaper_company;
+      }
     }, (err) => {
       console.log(err);
       return false;
     });
+
   }
 
   onPostSubmit() {
