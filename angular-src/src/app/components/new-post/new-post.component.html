@@ -1,18 +1,61 @@
-<form (ngSubmit)="onPostSubmit()">
-    제목
-    <input type="text" [(ngModel)]="title" [ngModelOptions]="{ standalone: true }">
-    카테고리
-    <select [(ngModel)]="category" [ngModelOptions]="{ standalone: true }">
-        <option>정치</option>
-        <option>경제</option>
-        <option>사회</option>
-        <option>생활/문화</option>
-        <option>세계</option>
-        <option>IT/과학</option>
-    </select>
+<hr size="10px" />
+<br /><br /><br /><br />
+<h1 class="page-header" style="text-align: center">기사 작성</h1>
+<br /><br /><br /><br />
+<hr size="10px" />
 
-    내용
-    <input type="text" [(ngModel)]="contents" [ngModelOptions]="{ standalone: true }">
-
-    <input type="submit" value="기사 업로드">
-</form>
+<section>
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div>
+        <div class="card shadow-2-strong" style="border-radius: 1rem">
+          <div class="card-body p-5 text-center">
+            <form (ngSubmit)="onPostSubmit()">
+              <div class="form-group">
+                <label for="title">제목</label>
+                <br />
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="title"
+                  [ngModelOptions]="{ standalone: true }"
+                />
+              </div>
+              <br />
+              <div class="form-group">
+                <label for="Categor">카테고리</label>
+                <br />
+                <select
+                  class="form-control input-sm"
+                  [(ngModel)]="category"
+                  [ngModelOptions]="{ standalone: true }"
+                >
+                  <option>정치</option>
+                  <option>경제</option>
+                  <option>사회</option>
+                  <option>생활/문화</option>
+                  <option>세계</option>
+                  <option>IT/과학</option>
+                </select>
+              </div>
+              <br />
+              <div class="mb-3">
+                <label for="Contents">내용</label>
+                <br />
+                <textarea
+                  class="form-control"
+                  id="exampleFormControlTextarea1"
+                  rows="3"
+                  [(ngModel)]="contents"
+                  [ngModelOptions]="{ standalone: true }"
+                ></textarea>
+              </div>
+              <br /><br />
+              <input type="submit" value="기사 업로드" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
