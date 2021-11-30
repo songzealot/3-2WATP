@@ -21,6 +21,10 @@ export class ValidateService {
       return { success: false, msg: "성별을 선택하세요." }
     } else if (user.age == undefined) {
       return { success: false, msg: "나이를 선택하세요." }
+    } else if (user.status == undefined) {
+      return { success: false, msg: "계정 유형을 선택하세요." }
+    } else if (user.status == '기자' && user.newspaper_company == undefined) {
+      return { success: false, msg: "신문사를 선택하세요." }
     } else {
       return { success: true, msg: "입력값 유효성 확인" }
     }

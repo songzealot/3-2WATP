@@ -38,7 +38,9 @@ router.post('/register', (req, res) => {
         username: req.body.username,
         password: req.body.password,
         age: req.body.age,
-        gender: req.body.gender
+        gender: req.body.gender,
+        status: req.body.status,
+        newspaper_company: req.body.newspaper_company
     });
 
     User.getUserByUsername(newUser.username, (err, user) => {

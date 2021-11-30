@@ -17,6 +17,8 @@ export class RegisterComponent implements OnInit {
   passwordCheck: string;
   age: string;
   gender: string;
+  status: string;
+  newspaper_company: string;
 
   constructor(
     // ---- 서비스 등록 ----
@@ -35,7 +37,9 @@ export class RegisterComponent implements OnInit {
       username: this.username,
       password: this.password,
       age: this.age,
-      gender: this.gender
+      gender: this.gender,
+      status: this.status,
+      newspaper_company: this.newspaper_company
     }
     console.log(user);
     const result = this.validateService.validateRegister(user, this.passwordCheck);

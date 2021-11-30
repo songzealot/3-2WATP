@@ -24,6 +24,14 @@ const UserSchema = mongoose.Schema({
     gender: {
         type: String,
         require: true
+    },
+    status: {
+        type: String,
+        required: true
+    },
+    newspaper_company: {
+        type: String,
+        required: false
     }
 });
 
