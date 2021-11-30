@@ -1,14 +1,43 @@
-<h1>로그인</h1>
-<form (ngSubmit)="onLoginSubmit()">
-    <div class="form-group">
-        <label for="inputID">아이디</label>
-        <input type="text" id="inputID" class="form-control" [(ngModel)]="username"
-            [ngModelOptions]="{ standalone : true }">
+<hr size="10px" />
+<br /><br /><br /><br />
+<h1 style="text-align: center">로그인</h1>
+<br /><br /><br /><br />
+<hr size="10px" />
+
+<section>
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card shadow-2-strong" style="border-radius: 1rem">
+          <div class="card-body p-5 text-center">
+            <form (ngSubmit)="onLoginSubmit()">
+              <div class="form-group">
+                <label for="inputID">아이디</label>
+                <input
+                  type="text"
+                  id="inputID"
+                  class="form-control"
+                  [(ngModel)]="username"
+                  [ngModelOptions]="{ standalone: true }"
+                />
+              </div>
+              <br />
+              <div class="form-group">
+                <label for="inputPW">패스워드</label>
+                <input
+                  type="text"
+                  id="inputPW"
+                  class="form-control"
+                  [(ngModel)]="password"
+                  [ngModelOptions]="{ standalone: true }"
+                />
+              </div>
+              <br /><br />
+              <input type="submit" value="로그인" class="btn btn-primary" />
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="form-group">
-        <label for="inputPW">패스워드</label>
-        <input type="text" id="inputPW" class="form-control" [(ngModel)]="password"
-            [ngModelOptions]="{ standalone : true }">
-    </div>
-    <input type="submit" value="로그인" class="btn btn-primary">
-</form>
+  </div>
+</section>
