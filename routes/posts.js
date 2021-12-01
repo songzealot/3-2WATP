@@ -50,7 +50,7 @@ router.post('/newsList', async (req, res) => {
         list = await Article.find().where('category').equals('IT/과학');
         sortedList = await Article.find().where('category').equals('IT/과학').sort('-view');
     }
-    res.json({ postList: list }, { sortedPostList: sortedList });
+    res.json({ postList: list });
 });
 
 
