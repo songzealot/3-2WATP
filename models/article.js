@@ -43,8 +43,6 @@ const ArticleSchema = mongoose.Schema({
 const Article = mongoose.model('Article', ArticleSchema);
 
 
-//Article.findById
-
 Article.addArticle = function (newArticle, callback) {
     newArticle.save(callback);
 }

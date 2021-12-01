@@ -24,13 +24,32 @@ router.post(`/postView`, (req, res) => {
     });
 });
 
-router.post('/newsList', (req, res) => {
+router.post('/newsList', async (req, res) => {
     const index = req.body.index;
-    console.log(index);
-    switch (index) {
-        case 1:
-            res.json(Article.find());
+    let list;
+    if (index == 1) {
+        list = await Article.find();
+        sortedList = await Article.find().sort('-view');
+    } else if (index == 2) {
+        list = await Article.find().where('category').equals('정치');
+        sortedList = await Article.find().where('category').equals('정치').sort('-view');
+    } else if (index == 3) {
+        list = await Article.find().where('category').equals('경제');
+        sortedList = await Article.find().where('category').equals('경제').sort('-view');
+    } else if (index == 4) {
+        list = await Article.find().where('category').equals('사회');
+        sortedList = await Article.find().where('category').equals('사회').sort('-view');
+    } else if (index == 5) {
+        list = await Article.find().where('category').equals('생활/문화');
+        sortedList = await Article.find().where('category').equals('생활/문화').sort('-view');
+    } else if (index == 6) {
+        list = await Article.find().where('category').equals('세계');
+        sortedList = await Article.find().where('category').equals('세계').sort('-view');
+    } else if (index == 7) {
+        list = await Article.find().where('category').equals('IT/과학');
+        sortedList = await Article.find().where('category').equals('IT/과학').sort('-view');
     }
+    res.json({ postList: list }, { sortedPostList: sortedList });
 });
 
 

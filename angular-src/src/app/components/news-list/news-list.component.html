@@ -2,22 +2,25 @@
 
 <ul class="nav nav-tabs nav justify-content-around">
   <li class="nav-item">
-    <a class="nav-link link-dark" href="#">정치</a>
+    <a class="nav-link link-dark" href="/newsList?cate=1" style="cursor: pointer">최신</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link link-dark" href="#">경제</a>
+    <a class="nav-link link-dark" href="/newsList?cate=2" style="cursor: pointer">정치</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link link-dark" href="#">사회</a>
+    <a class="nav-link link-dark" href="/newsList?cate=3" style="cursor: pointer">경제</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link link-dark" href="#">생활/문화</a>
+    <a class="nav-link link-dark" href="/newsList?cate=4" style="cursor: pointer">사회</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link link-dark" href="#">세계</a>
+    <a class="nav-link link-dark" href="/newsList?cate=5" style="cursor: pointer">생활/문화</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link link-dark" href="#">IT/과학</a>
+    <a class="nav-link link-dark" href="/newsList?cate=6" style="cursor: pointer">세계</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link link-dark" href="/newsList?cate=7" style="cursor: pointer">IT/과학</a>
   </li>
 </ul>
 
@@ -90,12 +93,12 @@
     </tr>
   </thead>
   <tbody>
-    <tr class="text-center">
-      <td>Title</td>
-      <td>Date</td>
-      <td>Comp</td>
-      <td>Writ</td>
-      <td>2</td>
+    <tr class="text-center" *ngFor="let postNumber of postlist" (click)="redirectPost(postNumber._id)">
+      <td>{{postNumber.title}}</td>
+      <td>{{dateString(postNumber.post_date)}}</td>
+      <td>{{postNumber.newspaper_company}}</td>
+      <td>{{postNumber.reporter}}</td>
+      <td>{{postNumber.view}}</td>
     </tr>
   </tbody>
 </table>
