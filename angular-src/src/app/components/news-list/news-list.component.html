@@ -93,7 +93,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr class="text-center" *ngFor="let postNumber of postlist">
+    <tr class="text-center" *ngFor="let postNumber of postlist" (click)="redirectPost(postNumber._id)">
       <td>{{postNumber.title}}</td>
       <td>{{dateString(postNumber.post_date)}}</td>
       <td>{{postNumber.newspaper_company}}</td>
