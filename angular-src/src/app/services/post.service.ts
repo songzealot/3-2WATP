@@ -26,7 +26,7 @@ export class PostService {
     const registerUrl = this.prepEndPoint('articles/post_article');
     return this.http.post<any>(registerUrl, article, httpOptions);
   }
-  //기사 조회
+  //기사 1개 조회
   postView(_id): Observable<any> {
     const registerUrl = this.prepEndPoint('posts/postView');
     return this.http.post(registerUrl, _id, httpOptions);
@@ -36,5 +36,12 @@ export class PostService {
   postListView(category): Observable<any> {
     const registerUrl = this.prepEndPoint('posts/newsList');
     return this.http.post(registerUrl, category, httpOptions);
+  }
+
+  //조회수 카운트
+  viewCount(_id): Observable<any> {
+    const registerUrl = this.prepEndPoint('posts/viewCountUp');
+    return this.http.post(registerUrl, _id, httpOptions);
+
   }
 }

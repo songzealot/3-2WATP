@@ -50,7 +50,24 @@ router.post('/newsList', async (req, res) => {
         list = await Article.find().where('category').equals('IT/과학');
         sortedList = await Article.find().where('category').equals('IT/과학').sort('-view');
     }
-    res.json({ postList: list });
+    res.json({ postList: list, sortByViewList: sortedList });
+});
+
+//조회수
+router.post('/viewCountUp', async (req, res) => {
+    const _id = mongoose.Types.ObjectId(String(req.body._id));
+    let viewCount;
+    Article.findById(_id, (err, doc) => {
+        if (err) {
+            console.log(err);
+            return res.json({ success: false, msg: "오류 발생" });
+        } else {
+            viewCount = doc.view;
+            viewCount++;
+            doc.updateOne({ view: viewCount });
+            res.json({ view: viewCount });
+        }
+    });
 });
 
 

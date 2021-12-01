@@ -24,7 +24,7 @@ export class PostViewComponent implements OnInit {
   contents: string;
   category: string;
   like: Number;
-  view: Number;
+  view: number;
   comment_count: Number;
   newspaper_company: string;
 
@@ -49,9 +49,12 @@ export class PostViewComponent implements OnInit {
           this.comment_count = data.article.comment_count;
           this.newspaper_company = data.article.newspaper_company;
         }
-
       });
-    })
+      this.postService.viewCount(post_id);
+      this.view++;
+    });
+
+
   }
 
   dateString(date1) {

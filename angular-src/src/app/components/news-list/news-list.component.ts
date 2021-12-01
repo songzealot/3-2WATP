@@ -22,7 +22,8 @@ export class NewsListComponent implements OnInit {
       const categoryNum = { index: params.cate }
       this.postService.postListView(categoryNum).subscribe((data) => {
         this.postlist = data.postList;
-        this.sortByViewList = data.sortedPostList;
+        this.sortByViewList = data.sortByViewList;
+        console.log(data);
       });
     });
   }
