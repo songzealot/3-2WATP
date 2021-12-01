@@ -2,7 +2,7 @@
 
 <ul class="nav nav-tabs nav justify-content-around">
   <li class="nav-item">
-    <a class="nav-link link-dark" href="/newsList?cate=1" style="cursor: pointer">최신</a>
+    <a class="nav-link link-dark" href="/newsList?cate=1" style="cursor: pointer">전체</a>
   </li>
   <li class="nav-item">
     <a class="nav-link link-dark" href="/newsList?cate=2" style="cursor: pointer">정치</a>
@@ -32,9 +32,9 @@
   <div class="col-sm-6">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
+        <h5 class="card-title">{{sortByViewList[0].title}}</h5>
         <p class="card-text">
-          With supporting text below as a natural lead-in to additional content.
+          {{sortByViewList[0].contents.substr(0,147)}} ...
         </p>
         <a href="#" class="btn btn-primary">Go somewhere</a>
       </div>
@@ -43,9 +43,9 @@
   <div class="col-sm-6">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
+        <h5 class="card-title">{{sortByViewList[1].title}}</h5>
         <p class="card-text">
-          With supporting text below as a natural lead-in to additional content.
+          {{sortByViewList[1].contents.substr(0,147)}} ...
         </p>
         <a href="#" class="btn btn-primary">Go somewhere</a>
       </div>
@@ -59,9 +59,9 @@
   <div class="col-sm-6">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
+        <h5 class="card-title">{{sortByViewList[2].title}}</h5>
         <p class="card-text">
-          With supporting text below as a natural lead-in to additional content.
+          {{sortByViewList[2].contents.substr(0,147)}} ...
         </p>
         <a href="#" class="btn btn-primary">Go somewhere</a>
       </div>
@@ -70,9 +70,9 @@
   <div class="col-sm-6">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
+        <h5 class="card-title">{{sortByViewList[3].title}}</h5>
         <p class="card-text">
-          With supporting text below as a natural lead-in to additional content.
+          {{sortByViewList[3].contents.substr(0,147)}} ...
         </p>
         <a href="#" class="btn btn-primary">Go somewhere</a>
       </div>
