@@ -27,6 +27,7 @@ router.post(`/postView`, (req, res) => {
 router.post('/newsList', async (req, res) => {
     const index = req.body.index;
     let list;
+    let sortedList;
     if (index == 1) {
         list = await Article.find();
         sortedList = await Article.find().sort('-view');
