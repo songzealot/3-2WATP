@@ -17,7 +17,8 @@ export class PostViewComponent implements OnInit {
     private flashMessage: FlashMessagesService
   ) { }
 
-  post_date: Date;
+
+  post_date: string;
   reporter: string;
   title: string;
   contents: string;
@@ -30,13 +31,15 @@ export class PostViewComponent implements OnInit {
   ngOnInit(): void {
     //get 파라미터 받아오기 - json으로 출력
     this.activateRoute.queryParams.subscribe((params) => {
-      console.log(params);
-      this.postService.postView(params._id).subscribe((data) => {
+      console.log(params._id);
+      const post_id = { _id: params._id };
+      this.postService.postView(post_id).subscribe((data) => {
+        console.log(data);
         if (!data.success) {
           this.flashMessage.show(data.msg, { cssClass: 'alert-success', timeoout: 3000 });
-          this.router.navigate(['/postList']);
+          this.router.navigate(['/newsList']);
         } else {
-          this.post_date = data.article.post_date;
+          this.post_date = this.dateString(data.article.post_date);
           this.reporter = data.article.reporter;
           this.title = data.article.title;
           this.contents = data.article.contents;
@@ -49,6 +52,19 @@ export class PostViewComponent implements OnInit {
 
       });
     })
+  }
+
+  dateString(date1) {
+    var date = new Date(date1);
+    var year = date.getFullYear();
+    var month = ('0' + (date.getMonth() + 1)).slice(-2);
+    var day = ('0' + date.getDate()).slice(-2);
+    var hours = ('0' + date.getHours()).slice(-2);
+    var minutes = ('0' + date.getMinutes()).slice(-2);
+    var seconds = ('0' + date.getSeconds()).slice(-2);
+
+    var dateString = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
+    return dateString;
   }
 
 }
