@@ -21,10 +21,11 @@ export class NewsListComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe((params) => {
       let categoryNum;
-      if (!params) {
+      if (!params.cate) {
         categoryNum = { index: 1 }
+      } else {
+        categoryNum = { index: params.cate }
       }
-      categoryNum = { index: params.cate }
       this.postService.postListView(categoryNum).subscribe((data) => {
         this.postList = data.postList;
         this.sortByViewList = data.sortByViewList;

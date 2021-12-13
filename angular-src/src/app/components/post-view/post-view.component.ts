@@ -36,7 +36,7 @@ export class PostViewComponent implements OnInit {
       this.postService.postView(post_id).subscribe((data) => {
         console.log(data);
         if (!data.success) {
-          this.flashMessage.show(data.msg, { cssClass: 'alert-success', timeoout: 3000 });
+          this.flashMessage.show(data.msg, { cssClass: 'alert-danger', timeoout: 3000 });
           this.router.navigate(['/newsList']);
         } else {
           this.post_date = this.dateString(data.article.post_date);
