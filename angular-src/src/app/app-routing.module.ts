@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CompanyComponent } from './components/company/company.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -20,7 +21,8 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'newsList', component: NewsListComponent },
   { path: 'newPost', component: NewPostComponent, canActivate: [AuthGuard] },
-  { path: 'postView', component: PostViewComponent }
+  { path: 'postView', component: PostViewComponent },
+  { path: 'newsCompany', component: CompanyComponent }
 ];
 
 @NgModule({

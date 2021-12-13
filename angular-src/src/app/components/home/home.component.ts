@@ -21,7 +21,6 @@ export class HomeComponent implements OnInit {
     this.postService.postListView({ index: 1 }).subscribe((data) => {
       this.newPost = data.postList[0];
       this.bestViewPost = data.sortByViewList[0];
-      console.log(this.newPost);
     });
   }
 

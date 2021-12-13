@@ -18,6 +18,7 @@ import { AuthGuard } from './etc/guards';
 import { NewsListComponent } from './components/news-list/news-list.component';
 import { NewPostComponent } from './components/new-post/new-post.component';
 import { PostViewComponent } from './components/post-view/post-view.component';
+import { CompanyComponent } from './components/company/company.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { PostViewComponent } from './components/post-view/post-view.component';
     ProfileComponent,
     NewsListComponent,
     NewPostComponent,
-    PostViewComponent
+    PostViewComponent,
+    CompanyComponent
   ],
   imports: [
     BrowserModule,
