@@ -38,10 +38,4 @@ export class PostService {
     return this.http.post(registerUrl, category, httpOptions);
   }
 
-  //조회수 카운트
-  viewCount(_id): Observable<any> {
-    const registerUrl = this.prepEndPoint('posts/viewCountUp');
-    return this.http.post(registerUrl, _id, httpOptions);
-
-  }
 }

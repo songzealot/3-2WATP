@@ -48,10 +48,9 @@ export class PostViewComponent implements OnInit {
           this.view = data.article.view;
           this.comment_count = data.article.comment_count;
           this.newspaper_company = data.article.newspaper_company;
+          console.log(this.contents);
         }
       });
-      this.postService.viewCount(post_id);
-      this.view++;
     });
 
 

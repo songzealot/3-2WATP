@@ -1,15 +1,17 @@
 <hr size="10px" />
 
-<h2 class="pb-3 mb-4 font-italic border-bottom">게시글 열람</h2>
+<h2 class="pb-3 mb-4 font-italic border-bottom">{{category}} > {{newspaper_company}} > {{reporter}}</h2>
 
 <div class="card">
     <div class="card-body">
         <nav id="navbar-example2" class="navbar navbar-light bg-light px-3">
-            <a class="navbar-brand">{{title}}</a>
+            <a class="navbar-brand">
+                <h4>[{{category}}] {{title}}</h4>
+            </a>
             <ul class="nav nav-pills">
-                <li class="nav-item">&nbsp;{{reporter}}&nbsp;</li>
-                <li class="nav-item">&nbsp;{{post_date}}&nbsp;</li>
-                <li class="nav-item">&nbsp;{{view}}&nbsp;</li>
+                <li class="nav-item">&nbsp;작성자: {{reporter}}&nbsp;</li>
+                <li class="nav-item">&nbsp;기사 작성: {{post_date}}&nbsp;</li>
+                <li class="nav-item">&nbsp;조회수: {{view}}&nbsp;</li>
             </ul>
         </nav>
 
@@ -17,8 +19,35 @@
 
         <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" class="scrollspy-example"
             tabindex="0">
-            <h4>{{title}}</h4>
-            <p>{{contents}}</p>
+            <pre style="font-family: var(--bs-body-font-family); font-size: 1em;">{{contents}}</pre>
+
         </div>
     </div>
+</div>
+<br>
+<div class="row">
+    <div class="col text-end">
+        <h4>댓글: 0</h4>
+    </div>
+    <div class="col">
+        <h4>좋아요: 0</h4>
+    </div>
+</div>
+
+<br>
+<div>
+    <h3 class="text-center">댓글</h3>
+    <div class="row">
+        <div class="col-2">
+
+        </div>
+        <div class="col-7">
+            <input type="text" class="form-control">
+        </div>
+        <div class="col-2">
+            <input type="submit" class="btn btn-secondary" value="댓글 입력">
+        </div>
+    </div>
+
+
 </div>

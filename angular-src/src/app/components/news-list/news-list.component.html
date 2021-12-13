@@ -31,21 +31,38 @@
 <div class="row">
   <div class="col-sm-6">
     <div class="card">
-      <div class="card-body">
+      <div class="card-body" *ngIf="sortByViewList[0]" (click)="redirectPost(sortByViewList[0]._id)"
+        style="cursor: pointer">
         <h5 class="card-title">{{sortByViewList[0].title}}</h5>
         <p class="card-text">
-          {{sortByViewList[0].contents.substr(0,147)}} ...
+          {{sortByViewList[0].contents.substr(0,97)}} ...
+        </p>
+        <p>조회수: {{sortByViewList[0].view}}</p>
+      </div>
+      <div class="card-body" *ngIf="!sortByViewList[0]">
+        <h5 class="card-title">기사없음</h5>
+        <p class="card-text">
+          기사없음
         </p>
         <a href="#" class="btn btn-primary">Go somewhere</a>
       </div>
     </div>
   </div>
+
   <div class="col-sm-6">
     <div class="card">
-      <div class="card-body">
+      <div class="card-body" *ngIf="sortByViewList[1]" (click)="redirectPost(sortByViewList[1]._id)"
+        style="cursor: pointer">
         <h5 class="card-title">{{sortByViewList[1].title}}</h5>
         <p class="card-text">
-          {{sortByViewList[1].contents.substr(0,147)}} ...
+          {{sortByViewList[1].contents.substr(0,97)}} ...
+        </p>
+        <p>조회수: {{sortByViewList[1].view}}</p>
+      </div>
+      <div class="card-body" *ngIf="!sortByViewList[1]">
+        <h5 class="card-title">기사없음</h5>
+        <p class="card-text">
+          기사없음
         </p>
         <a href="#" class="btn btn-primary">Go somewhere</a>
       </div>
@@ -58,21 +75,38 @@
 <div class="row">
   <div class="col-sm-6">
     <div class="card">
-      <div class="card-body">
+      <div class="card-body" *ngIf="sortByViewList[2]" (click)="redirectPost(sortByViewList[2]._id)"
+        style="cursor: pointer">
         <h5 class="card-title">{{sortByViewList[2].title}}</h5>
         <p class="card-text">
-          {{sortByViewList[2].contents.substr(0,147)}} ...
+          {{sortByViewList[2].contents.substr(0,97)}} ...
+        </p>
+        <p>조회수: {{sortByViewList[2].view}}</p>
+      </div>
+      <div class="card-body" *ngIf="!sortByViewList[2]">
+        <h5 class="card-title">기사없음</h5>
+        <p class="card-text">
+          기사없음
         </p>
         <a href="#" class="btn btn-primary">Go somewhere</a>
       </div>
     </div>
   </div>
+
   <div class="col-sm-6">
     <div class="card">
-      <div class="card-body">
+      <div class="card-body" *ngIf="sortByViewList[3]" (click)="redirectPost(sortByViewList[3]._id)"
+        style="cursor: pointer">
         <h5 class="card-title">{{sortByViewList[3].title}}</h5>
         <p class="card-text">
-          {{sortByViewList[3].contents.substr(0,147)}} ...
+          {{sortByViewList[3].contents.substr(0,97)}} ...
+        </p>
+        <p>조회수: {{sortByViewList[3].view}}</p>
+      </div>
+      <div class="card-body" *ngIf="!sortByViewList[3]">
+        <h5 class="card-title">기사없음</h5>
+        <p class="card-text">
+          기사없음
         </p>
         <a href="#" class="btn btn-primary">Go somewhere</a>
       </div>
@@ -93,7 +127,8 @@
     </tr>
   </thead>
   <tbody>
-    <tr class="text-center" *ngFor="let postNumber of postlist" (click)="redirectPost(postNumber._id)">
+    <tr class="text-center" *ngFor="let postNumber of postList" (click)="redirectPost(postNumber._id)"
+      style="cursor: pointer">
       <td>{{postNumber.title}}</td>
       <td>{{dateString(postNumber.post_date)}}</td>
       <td>{{postNumber.newspaper_company}}</td>

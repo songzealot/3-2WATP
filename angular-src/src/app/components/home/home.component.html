@@ -19,42 +19,30 @@
     <div class="card flex-md-row mb-4 box-shadow h-md-250">
       <div class="card-body d-flex flex-column align-items-start">
         <strong class="d-inline-block mb-2 text-primary">최신 뉴스</strong>
-        <h3 class="mb-0">
-          <a class="text-dark" href="#">Featured post</a>
-        </h3>
-        <div class="mb-1 text-muted">Nov 12</div>
+        <h4 class="mb-0"> {{newPost.title.substr(0,17)}} </h4>
+        <div class="mb-1 text-muted">{{dateString(newPost.post_date)}}</div>
         <p class="card-text mb-auto">
-          This is a wider card with supporting text below as a natural lead-in
-          to additional content.
+          {{newPost.contents.substr(0,57)}}...
         </p>
         <a href="#">Continue reading</a>
       </div>
-      <img
-        class="card-img-right flex-auto d-none d-md-block"
-        src="../../../assets/image/test.png"
-        alt="Card image cap"
-      />
+      <img class="card-img-right flex-auto d-none d-md-block" src="../../../assets/image/test.png"
+        alt="Card image cap" />
     </div>
   </div>
   <div class="col-md-6">
     <div class="card flex-md-row mb-4 box-shadow h-md-250">
       <div class="card-body d-flex flex-column align-items-start">
-        <strong class="d-inline-block mb-2 text-success">Design</strong>
-        <h3 class="mb-0">
-          <a class="text-dark" href="#">Post title</a>
-        </h3>
-        <div class="mb-1 text-muted">Nov 11</div>
+        <strong class="d-inline-block mb-2 text-success">가장 높은 조회수</strong>
+        <h4 class="mb-0">{{BestViewPost.title.substr(0,17)}}...</h4>
+        <div class="mb-1 text-muted">{{dateString(BestViewPost.post_date)}}</div>
         <p class="card-text mb-auto">
-          This is a wider card with supporting text below as a natural lead-in
-          to additional content.
+          {{BestViewPost.contents.substr(0,57)}}...
         </p>
         <a href="#">Continue reading</a>
       </div>
-      <img
-        class="card-img-right flex-auto d-none d-md-block"
-        src="../../../assets/image/test.png"
-        alt="Card image cap"
-      />
+      <img class="card-img-right flex-auto d-none d-md-block" src="../../../assets/image/test.png"
+        alt="Card image cap" />
     </div>
   </div>
 </div>
@@ -70,7 +58,7 @@
         <img src="images/card-image.png" alt="" class="card-img-top" />
         <div class="card-body">
           <h3 class="card-title">Alpha</h3>
-          <p class="card-text">Comment</p>
+          <p class="card-text">신문사1</p>
           <a href="#" class="btn btn-dark">More</a>
         </div>
       </div>
@@ -81,7 +69,7 @@
         <img src="images/card-image.png" alt="" class="card-img-top" />
         <div class="card-body">
           <h3 class="card-title">Bravo</h3>
-          <p class="card-text">Comment</p>
+          <p class="card-text">신문사2</p>
           <a href="#" class="btn btn-dark">More</a>
         </div>
       </div>
@@ -92,7 +80,7 @@
         <img src="images/card-image.png" alt="" class="card-img-top" />
         <div class="card-body">
           <h3 class="card-title">Crawling</h3>
-          <p class="card-text">Comment</p>
+          <p class="card-text">신문사3</p>
           <a href="#" class="btn btn-dark">More</a>
         </div>
       </div>
@@ -103,7 +91,7 @@
         <img src="images/card-image.png" alt="" class="card-img-top" />
         <div class="card-body">
           <h3 class="card-title">Delta</h3>
-          <p class="card-text">Comment</p>
+          <p class="card-text">신문사4</p>
           <a href="#" class="btn btn-dark">More</a>
         </div>
       </div>
@@ -114,7 +102,7 @@
         <img src="images/card-image.png" alt="" class="card-img-top" />
         <div class="card-body">
           <h3 class="card-title">Echo</h3>
-          <p class="card-text">Comment</p>
+          <p class="card-text">신문사5</p>
           <a href="#" class="btn btn-dark">More</a>
         </div>
       </div>
@@ -123,8 +111,8 @@
     <div class="col-2">
       <div class="card">
         <div class="card-body">
-          <h3 class="card-title">FoxTrot</h3>
-          <p class="card-text">Comment</p>
+          <h3 class="card-title">Foxtrot</h3>
+          <p class="card-text">신문사6</p>
           <a href="#" class="btn btn-dark">More</a>
         </div>
       </div>

@@ -9,21 +9,25 @@ import { PostService } from 'src/app/services/post.service';
 })
 export class NewsListComponent implements OnInit {
 
-  postlist: any;
+  postList: any;
   sortByViewList: any;
 
-  constructor(private activateRoute: ActivatedRoute,
+  constructor(
+    private activateRoute: ActivatedRoute,
     private router: Router,
     private postService: PostService
   ) { }
 
   ngOnInit(): void {
     this.activateRoute.queryParams.subscribe((params) => {
-      const categoryNum = { index: params.cate }
+      let categoryNum;
+      if (!params) {
+        categoryNum = { index: 1 }
+      }
+      categoryNum = { index: params.cate }
       this.postService.postListView(categoryNum).subscribe((data) => {
-        this.postlist = data.postList;
+        this.postList = data.postList;
         this.sortByViewList = data.sortByViewList;
-        console.log(data);
       });
     });
   }

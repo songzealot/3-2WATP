@@ -51,10 +51,6 @@ Article.deleteArticle = function (article, callback) {
     Article.remove()
 }
 
-Article.viewArticle = function (id, callback) {
-
-}
-
 Article.test = function () { }
 // 작업 중
 
