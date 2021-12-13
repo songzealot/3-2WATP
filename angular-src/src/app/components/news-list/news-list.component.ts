@@ -13,13 +13,13 @@ export class NewsListComponent implements OnInit {
   sortByViewList: any;
 
   constructor(
-    private activateRoute: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private router: Router,
     private postService: PostService
   ) { }
 
   ngOnInit(): void {
-    this.activateRoute.queryParams.subscribe((params) => {
+    this.activatedRoute.queryParams.subscribe((params) => {
       let categoryNum;
       if (!params) {
         categoryNum = { index: 1 }
