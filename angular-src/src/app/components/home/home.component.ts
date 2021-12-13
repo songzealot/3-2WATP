@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { PostService } from 'src/app/services/post.service';
 
 @Component({
@@ -9,16 +10,17 @@ import { PostService } from 'src/app/services/post.service';
 export class HomeComponent implements OnInit {
 
   newPost: any;
-  BestViewPost: any;
+  bestViewPost: any;
 
   constructor(
-    private postService: PostService
+    private postService: PostService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     this.postService.postListView({ index: 1 }).subscribe((data) => {
       this.newPost = data.postList[0];
-      this.BestViewPost = data.sortByViewList[0];
+      this.bestViewPost = data.sortByViewList[0];
       console.log(this.newPost);
     });
   }
@@ -34,5 +36,9 @@ export class HomeComponent implements OnInit {
 
     var dateString = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
     return dateString;
+  }
+
+  redirectPost(post_id) {
+    this.router.navigate([`/postView`], { queryParams: { _id: post_id } });
   }
 }
