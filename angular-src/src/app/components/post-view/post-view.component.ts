@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
 
 @Component({
@@ -14,27 +15,27 @@ export class PostViewComponent implements OnInit {
     private activateRoute: ActivatedRoute,
     private router: Router,
     private postService: PostService,
-    private flashMessage: FlashMessagesService
+    private flashMessage: FlashMessagesService,
+    private authService: AuthService
   ) { }
 
-
+  postId: string;
   post_date: string;
   reporter: string;
   title: string;
   contents: string;
   category: string;
-  like: Number;
+  like: number;
   view: number;
-  comment_count: Number;
+  comment_count: number;
   newspaper_company: string;
 
   ngOnInit(): void {
     //get 파라미터 받아오기 - json으로 출력
     this.activateRoute.queryParams.subscribe((params) => {
-      console.log(params._id);
+      this.postId = params._id;
       const post_id = { _id: params._id };
       this.postService.postView(post_id).subscribe((data) => {
-        console.log(data);
         if (!data.success) {
           this.flashMessage.show(data.msg, { cssClass: 'alert-danger', timeoout: 3000 });
           this.router.navigate(['/newsList']);
@@ -48,7 +49,6 @@ export class PostViewComponent implements OnInit {
           this.view = data.article.view;
           this.comment_count = data.article.comment_count;
           this.newspaper_company = data.article.newspaper_company;
-          console.log(this.contents);
         }
       });
     });
@@ -67,6 +67,21 @@ export class PostViewComponent implements OnInit {
 
     var dateString = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
     return dateString;
+  }
+
+  countUpLike() {
+    if (this.authService.loggedIn()) {
+      this.authService.getProfile().subscribe((data) => {
+        // data.user.nickname
+        this.postService.postLike(this.postId, data.user.nickname).subscribe((data) => {
+          console.log(this.postId);
+          console.log(data);
+        });
+      });
+    } else {
+      this.flashMessage.show('로그인이 필요합니다', { cssClass: 'alert-danger', timeout: 3000 });
+    }
+    this.like = this.like + 1;
   }
 
 }

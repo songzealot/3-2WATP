@@ -25,6 +25,10 @@ const ArticleSchema = mongoose.Schema({
         type: Number,
         required: true
     },
+    likeUser: {
+        type: String,
+        required: false
+    },
     view: {
         type: Number,
         required: true

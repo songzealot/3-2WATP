@@ -38,8 +38,17 @@ export class PostService {
     return this.http.post(registerUrl, category, httpOptions);
   }
 
+  // 신문사, 카테고리별 기사 목록
   postCompany(company, category): Observable<any> {
     const registerUrl = this.prepEndPoint('posts/companyPost');
     return this.http.post(registerUrl, { company: company, category: category }, httpOptions);
   }
+
+  //기사 좋아요
+  postLike(_id, nickname): Observable<any> {
+    const registerUrl = this.prepEndPoint('posts/likeUp');
+    return this.http.post(registerUrl, { _id: _id, nickname: nickname }, httpOptions);
+  }
+
+
 }

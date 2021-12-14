@@ -4,12 +4,11 @@ const router = express.Router();
 const Article = require('../models/article');
 const mongoose = require('mongoose');
 
-
+// 기사 보기
 router.post(`/postView`, (req, res) => {
     // const ObjectId = mongoose.Types.ObjectId;
     // obj_id = ObjectId(req.body._id);
     //'61a6681fb36daab8410e8cc9'
-    let view;
     const _id = mongoose.Types.ObjectId(String(req.body._id));
     Article.findById(_id, (err, doc) => {
         if (err) {
@@ -27,6 +26,7 @@ router.post(`/postView`, (req, res) => {
     });
 });
 
+// 기사 조회
 router.post('/newsList', async (req, res) => {
     const index = req.body.index;
     let list;
@@ -56,6 +56,7 @@ router.post('/newsList', async (req, res) => {
     res.json({ postList: list, sortByViewList: sortedList });
 });
 
+// 신문사, 카테고리별 기사 목록
 router.post('/companyPost', async (req, res) => {
     const category = req.body.category;
     const company = req.body.company;
@@ -76,6 +77,35 @@ router.post('/companyPost', async (req, res) => {
         list = await Article.find({ newspaper_company: company }).where('category').equals('IT/과학').sort('-post_date');
     }
     res.json({ companyPost: list });
+});
+
+// 기사 좋아요 추가
+router.post('/likeUp', (req, res) => {
+    const _id = mongoose.Types.ObjectId(String(req.body._id));
+    Article.findById(_id, (err, doc) => {
+        if (err) {
+            console.log(err);
+            return res.json({ success: false, msg: "오류 발생" });
+        } else {
+            if (doc) {
+                if (!doc.likeUser) {
+                    doc.likeUser = [req.body.nickname];
+                    return res.json({ success: true, msg: "첫번째 좋아요" });
+                } else {
+                    if (doc.likeUser.includes(req.body.nickname)) {
+                        return res.json({ success: false, msg: "이미 추천한 기사입니다." });
+                    } else {
+                        doc.likeUser.push(req.body.nickname);
+                        doc.like = doc.like + 1;
+                        doc.save();
+                        return res.json({ success: true, msg: "좋아요" });
+                    }
+                }
+            } else {
+                return res.json({ success: false, msg: "존재하지 않는 문서" });
+            }
+        }
+    });
 });
 
 

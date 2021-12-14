@@ -27,10 +27,11 @@
 <br>
 <div class="row">
     <div class="col text-end">
-        <h4>댓글: 0</h4>
+        <h4>댓글: {{comment_count}}</h4>
     </div>
-    <div class="col">
-        <h4>좋아요: 0</h4>
+    <div class="col row">
+        <button class="btn btn-primary col col-2" (click)="countUpLike()">좋아요</button>
+        <h4 class="col">: {{like}}</h4>
     </div>
 </div>
 
