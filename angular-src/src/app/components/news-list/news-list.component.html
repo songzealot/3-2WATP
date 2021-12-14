@@ -37,7 +37,7 @@
         <p class="card-text">
           {{sortByViewList[0].contents.substr(0,97)}} ...
         </p>
-        <p>조회수: {{sortByViewList[0].view}}</p>
+        <p>조회수: {{sortByViewList[0].view}} &nbsp; 추천수: {{sortByViewList[0].like}}</p>
       </div>
       <div class="card-body" *ngIf="!sortByViewList[0]">
         <h5 class="card-title">기사없음</h5>
@@ -57,7 +57,7 @@
         <p class="card-text">
           {{sortByViewList[1].contents.substr(0,97)}} ...
         </p>
-        <p>조회수: {{sortByViewList[1].view}}</p>
+        <p>조회수: {{sortByViewList[1].view}} &nbsp; 추천수: {{sortByViewList[1].like}}</p>
       </div>
       <div class="card-body" *ngIf="!sortByViewList[1]">
         <h5 class="card-title">기사없음</h5>
@@ -81,7 +81,7 @@
         <p class="card-text">
           {{sortByViewList[2].contents.substr(0,97)}} ...
         </p>
-        <p>조회수: {{sortByViewList[2].view}}</p>
+        <p>조회수: {{sortByViewList[2].view}} &nbsp; 추천수: {{sortByViewList[2].like}}</p>
       </div>
       <div class="card-body" *ngIf="!sortByViewList[2]">
         <h5 class="card-title">기사없음</h5>
@@ -101,7 +101,7 @@
         <p class="card-text">
           {{sortByViewList[3].contents.substr(0,97)}} ...
         </p>
-        <p>조회수: {{sortByViewList[3].view}}</p>
+        <p>조회수: {{sortByViewList[3].view}} &nbsp; 추천수: {{sortByViewList[3].like}}</p>
       </div>
       <div class="card-body" *ngIf="!sortByViewList[3]">
         <h5 class="card-title">기사없음</h5>
@@ -119,11 +119,13 @@
 <table class="table">
   <thead>
     <tr class="text-center">
-      <th scope="col" style="width: 65%">제목</th>
+      <th scope="col" style="width: 49%">제목</th>
       <th scope="col" style="width: 10%">날짜</th>
       <th scope="col" style="width: 10%">신문사</th>
       <th scope="col" style="width: 10%">작성자</th>
-      <th scope="col" style="width: 5%">조회수</th>
+      <th scope="col" style="width: 7%">조회수</th>
+      <th scope="col" style="width: 7%">댓글</th>
+      <th scope="col" style="width: 7%">추천수</th>
     </tr>
   </thead>
   <tbody>
@@ -134,6 +136,8 @@
       <td>{{postNumber.newspaper_company}}</td>
       <td>{{postNumber.reporter}}</td>
       <td>{{postNumber.view}}</td>
+      <td>{{postNumber.comment_count}}</td>
+      <td>{{postNumber.like}}</td>
     </tr>
   </tbody>
 </table>
