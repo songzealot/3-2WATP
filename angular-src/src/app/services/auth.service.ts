@@ -46,12 +46,12 @@ export class AuthService {
   // 로그인정보 로컬스토리지 저장
   storeUserData(token: any, userLoginInfo: UserLoginInfo) {
     localStorage.setItem('authToken', token);
-    localStorage.setItem('userLoginInfo', JSON.stringify(userLoginInfo));
+    //localStorage.setItem('userLoginInfo', JSON.stringify(userLoginInfo));
   }
   // 로그아웃
   logout() {
     localStorage.removeItem('authToken');
-    localStorage.removeItem('userInfo');
+    //localStorage.removeItem('userLoginInfo');
   }
   // 로그인 여부 확인
   loggedIn(): boolean {
