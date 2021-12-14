@@ -74,14 +74,17 @@ export class PostViewComponent implements OnInit {
       this.authService.getProfile().subscribe((data) => {
         // data.user.nickname
         this.postService.postLike(this.postId, data.user.nickname).subscribe((data) => {
-          console.log(this.postId);
           console.log(data);
+          if (!data.success) {
+            this.flashMessage.show(data.msg, { cssClass: 'alert-danger', timeout: 3000 });
+          } else {
+            this.like = this.like + 1;
+          }
         });
       });
     } else {
       this.flashMessage.show('로그인이 필요합니다', { cssClass: 'alert-danger', timeout: 3000 });
     }
-    this.like = this.like + 1;
   }
 
 }

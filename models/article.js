@@ -26,7 +26,7 @@ const ArticleSchema = mongoose.Schema({
         required: true
     },
     likeUser: {
-        type: String,
+        type: Array,
         required: false
     },
     view: {

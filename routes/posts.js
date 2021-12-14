@@ -90,6 +90,8 @@ router.post('/likeUp', (req, res) => {
             if (doc) {
                 if (!doc.likeUser) {
                     doc.likeUser = [req.body.nickname];
+                    doc.like = doc.like + 1;
+                    doc.save();
                     return res.json({ success: true, msg: "첫번째 좋아요" });
                 } else {
                     if (doc.likeUser.includes(req.body.nickname)) {
