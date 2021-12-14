@@ -71,5 +71,11 @@ User.comparePassword = function (candidatePassword, hash, callback) {
     });
 }
 
+// 기자 목록
+User.getReporter = async function (company, callback) {
+    let list;
+    list = await User.find().where('newspaper_company').equals(company).sort('nickname').exec();
+    callback(null, list);
+}
 
 module.exports = User;

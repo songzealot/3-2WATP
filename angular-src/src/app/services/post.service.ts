@@ -38,4 +38,8 @@ export class PostService {
     return this.http.post(registerUrl, category, httpOptions);
   }
 
+  postCompany(company, category): Observable<any> {
+    const registerUrl = this.prepEndPoint('posts/companyPost');
+    return this.http.post(registerUrl, { company: company, category: category }, httpOptions);
+  }
 }

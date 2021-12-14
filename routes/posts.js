@@ -56,6 +56,28 @@ router.post('/newsList', async (req, res) => {
     res.json({ postList: list, sortByViewList: sortedList });
 });
 
+router.post('/companyPost', async (req, res) => {
+    const category = req.body.category;
+    const company = req.body.company;
+    let list;
+    if (category == 1) {
+        list = await Article.find({ newspaper_company: company }).sort('-post_date');
+    } else if (category == 2) {
+        list = await Article.find({ newspaper_company: company }).where('category').equals('정치').sort('-post_date');
+    } else if (category == 3) {
+        list = await Article.find({ newspaper_company: company }).where('category').equals('경제').sort('-post_date');
+    } else if (category == 4) {
+        list = await Article.find({ newspaper_company: company }).where('category').equals('사회').sort('-post_date');
+    } else if (category == 5) {
+        list = await Article.find({ newspaper_company: company }).where('category').equals('생활/문화').sort('-post_date');
+    } else if (category == 6) {
+        list = await Article.find({ newspaper_company: company }).where('category').equals('세계').sort('-post_date');
+    } else if (category == 7) {
+        list = await Article.find({ newspaper_company: company }).where('category').equals('IT/과학').sort('-post_date');
+    }
+    res.json({ companyPost: list });
+});
+
 
 
 module.exports = router;

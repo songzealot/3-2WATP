@@ -71,6 +71,11 @@ export class AuthService {
     return this.http.get(profileUrl, httpOptionsP);
   }
 
+  //기자 목록 가져오기
+  getReporter(company): Observable<any> {
+    const profileUrl = this.prepEndPoint('users/reporterList');
+    return this.http.post(profileUrl, { company: company }, httpOptions);
+  }
 
 }
 

@@ -100,5 +100,18 @@ router.post('/authenticate', (req, res) => {
     });
 });
 
+//기자 목록 가져오기
+router.post('/reporterList', (req, res) => {
+    const company = req.body.company;
+    User.getReporter(company, (err, list) => {
+        if (err) {
+            console.log(err);
+            return res.json({ success: false, msg: '기자 목록 조회 오류 발생' });
+        } else {
+            return res.json({ success: true, list: list, msg: `${company}의 기자 목록 조회됨` });
+        }
+    });
+});
+
 
 module.exports = router;
