@@ -88,5 +88,10 @@ export class AuthService {
     const profileUrl = this.prepEndPoint('users/updateUser');
     return this.http.post(profileUrl, userData, httpOptions);
   }
+
+  goSubscribe(forSub): Observable<any> {
+    const profileUrl = this.prepEndPoint('users/goSubscribe');
+    return this.http.post(profileUrl, forSub, httpOptions);
+  }
 }
 

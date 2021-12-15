@@ -25,40 +25,46 @@ export class SubscribeComponent implements OnInit {
   postList_reporter: any;
 
   ngOnInit(): void {
+    this.postList_company = [];
+    this.postList_reporter = [];
     this.authService.getProfile().subscribe((data) => {
-      this.subscribe_company = data.subscribe_com;
-      this.subscribe_reporter = data.subscribe_rep;
+      this.subscribe_company = data.user.subscribe_com;
+      this.subscribe_reporter = data.user.subscribe_rep;
+
+
+      for (let temp of this.subscribe_company) {
+        let forPost = {
+          type: 'newspaper_company',
+          value: temp,
+          category: 1
+        }
+        this.postService.postCompany(forPost).subscribe((data) => {
+          const forList = {
+            target: temp,
+            postList: data.postList
+          }
+          this.postList_company.push(forList);
+        });
+      }
+      for (let temp of this.subscribe_reporter) {
+        let forPost = {
+          type: 'reporter',
+          value: temp,
+          category: 1
+        }
+        this.postService.postCompany(forPost).subscribe((data) => {
+          const forList = {
+            target: temp,
+            postList: data.postList
+          }
+          this.postList_reporter.push(forList);
+        });
+      }
+
+
     });
 
 
-    for (let temp of this.subscribe_company) {
-      let forPost = {
-        type: 'newspaper_company',
-        value: temp,
-        category: 1
-      }
-      this.postService.postCompany(forPost).subscribe((data) => {
-        const forList = {
-          target: temp,
-          postList: data.postList
-        }
-        this.postList_company.push(forList);
-      });
-    }
-    for (let temp of this.subscribe_reporter) {
-      let forPost = {
-        type: 'reporter',
-        value: temp,
-        category: 1
-      }
-      this.postService.postCompany(forPost).subscribe((data) => {
-        const forList = {
-          target: temp,
-          postList: data.postList
-        }
-        this.postList_reporter.push(forList);
-      });
-    }
   }
 
   dateString(date1) {
