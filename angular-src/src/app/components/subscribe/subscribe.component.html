@@ -2,40 +2,87 @@
     <div class="row">
         <div class="col">
             <h3>구독중인 신문사</h3>
+
             <div *ngFor="let list of postList_company">
                 <div>
                     <h4>{{list.target}}</h4>
                 </div>
-                <div>
-                    <div>
-                        {{list.postList[0].title}} &nbsp; {{dateString(list.postList[0].post_date)}}
-                    </div>
-                    <div>
-                        {{list.postList[1].title}} &nbsp; {{dateString(list.postList[1].post_date)}}
-                    </div>
-                    <div>
-                        {{list.postList[2].title}} &nbsp; {{dateString(list.postList[2].post_date)}}
-                    </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr class="text-center">
+                                <th scope="col" style="width: 80%">제목</th>
+                                <th scope="col" style="width: 20%">날짜</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center" (click)="redirectPost(list.postList[0]._id)" style="cursor: pointer"
+                                *ngIf="list.postList[0]">
+                                <td>[{{list.postList[0].category}}] {{list.postList[0].title}}</td>
+                                <td>{{dateString(list.postList[0].post_date)}}</td>
+                            </tr>
+                            <tr class="text-center" (click)="redirectPost(list.postList[1]._id)" style="cursor: pointer"
+                                *ngIf="list.postList[1]">
+                                <td>[{{list.postList[1].category}}] {{list.postList[1].title}}</td>
+                                <td>{{dateString(list.postList[1].post_date)}}</td>
+                            </tr>
+                            <tr class="text-center" (click)="redirectPost(list.postList[2]._id)" style="cursor: pointer"
+                                *ngIf="list.postList[2]">
+                                <td>[{{list.postList[2].category}}] {{list.postList[2].title}}</td>
+                                <td>{{dateString(list.postList[2].post_date)}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
+
         <div class="col">
             <h3>구독중인 기자</h3>
             <div *ngFor="let list of postList_reporter">
                 <div>
                     <h4>{{list.target}}</h4>
                 </div>
-                <div>
-                    <div>
+
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr class="text-center">
+                                <th scope="col" style="width: 80%">제목</th>
+                                <th scope="col" style="width: 20%">날짜</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center" (click)="redirectPost(list.postList[0]._id)" style="cursor: pointer"
+                                *ngIf="list.postList[0]">
+                                <td>[{{list.postList[0].category}}] {{list.postList[0].title}}</td>
+                                <td>{{dateString(list.postList[0].post_date)}}</td>
+                            </tr>
+                            <tr class="text-center" (click)="redirectPost(list.postList[1]._id)" style="cursor: pointer"
+                                *ngIf="list.postList[1]">
+                                <td>[{{list.postList[1].category}}] {{list.postList[1].title}}</td>
+                                <td>{{dateString(list.postList[1].post_date)}}</td>
+                            </tr>
+                            <tr class="text-center" (click)="redirectPost(list.postList[2]._id)" style="cursor: pointer"
+                                *ngIf="list.postList[2]">
+                                <td>[{{list.postList[2].category}}] {{list.postList[2].title}}</td>
+                                <td>{{dateString(list.postList[2].post_date)}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- <div>
+                    <div *ngIf="list.postList[0]">
                         {{list.postList[0].title}} &nbsp; {{dateString(list.postList[0].post_date)}}
                     </div>
-                    <div>
+                    <div *ngIf="list.postList[1]">
                         {{list.postList[1].title}} &nbsp; {{dateString(list.postList[1].post_date)}}
                     </div>
-                    <div>
+                    <div *ngIf="list.postList[2]">
                         {{list.postList[2].title}} &nbsp; {{dateString(list.postList[2].post_date)}}
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

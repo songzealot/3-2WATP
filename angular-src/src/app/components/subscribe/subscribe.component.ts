@@ -25,42 +25,14 @@ export class SubscribeComponent implements OnInit {
   postList_reporter: any;
 
   ngOnInit(): void {
-    this.postList_company = [];
-    this.postList_reporter = [];
     this.authService.getProfile().subscribe((data) => {
+      this.postList_company = [];
+      this.postList_reporter = [];
       this.subscribe_company = data.user.subscribe_com;
       this.subscribe_reporter = data.user.subscribe_rep;
 
-
-      for (let temp of this.subscribe_company) {
-        let forPost = {
-          type: 'newspaper_company',
-          value: temp,
-          category: 1
-        }
-        this.postService.postCompany(forPost).subscribe((data) => {
-          const forList = {
-            target: temp,
-            postList: data.postList
-          }
-          this.postList_company.push(forList);
-        });
-      }
-      for (let temp of this.subscribe_reporter) {
-        let forPost = {
-          type: 'reporter',
-          value: temp,
-          category: 1
-        }
-        this.postService.postCompany(forPost).subscribe((data) => {
-          const forList = {
-            target: temp,
-            postList: data.postList
-          }
-          this.postList_reporter.push(forList);
-        });
-      }
-
+      this.subView('newspaper_company', this.subscribe_company);
+      this.subView('reporter', this.subscribe_reporter);
 
     });
 
@@ -79,4 +51,38 @@ export class SubscribeComponent implements OnInit {
     var dateString = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
     return dateString;
   }
+
+  redirectPost(post_id) {
+    this.router.navigate([`/postView`], { queryParams: { _id: post_id } });
+  }
+
+
+  // 구독 중인 내용 확인
+  test1(type, temp) {
+    let forPost = {
+      type: type,
+      value: temp,
+      category: 1
+    }
+    return new Promise((resolve) => {
+      this.postService.postCompany(forPost).subscribe((data) => {
+        const forList = {
+          target: temp,
+          postList: data.postList
+        }
+        resolve(forList);
+      });
+    });
+  }
+
+  async subView(type, temp2) {
+    const promises = temp2.map(async (data) => {
+      return await this.test1(type, data)
+        .then()
+    });
+
+    this.postList_reporter = await Promise.all(promises);
+    console.log(this.postList_reporter);
+  }
 }
+

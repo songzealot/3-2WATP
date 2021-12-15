@@ -1,56 +1,49 @@
 <section>
-  <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div>
-        <div class="card shadow-2-strong" style="border-radius: 1rem">
-          <div class="card-body p-5 text-center">
-            <form (ngSubmit)="onPostSubmit()">
-              <div class="form-group">
+  <mat-card style="width: 1050px">
+    <form (ngSubmit)="onPostSubmit()">
+      <mat-form-field appearance="fill" style="min-width: 1000px;">
+        <mat-label>제목</mat-label>
+        <input
+          matInput
+          [(ngModel)]="title"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </mat-form-field>
 
-                <label for="title">제목</label>
-                <br />
-                <input
-                  type="text"
-                  class="form-control"
-                  [(ngModel)]="title"
-                  [ngModelOptions]="{ standalone: true }"
-                />
-              </div>
-              <br />
-              <div class="form-group">
-                <label for="Categor">카테고리</label>
-                <br />
-                <select
-                  class="form-control input-sm"
-                  [(ngModel)]="category"
-                  [ngModelOptions]="{ standalone: true }"
-                >
-                  <option>정치</option>
-                  <option>경제</option>
-                  <option>사회</option>
-                  <option>생활/문화</option>
-                  <option>세계</option>
-                  <option>IT/과학</option>
-                </select>
-              </div>
-              <br />
-              <div class="mb-3">
-                <label for="Contents">내용</label>
-                <br />
-                <textarea
-                  class="form-control"
-                  id="exampleFormControlTextarea1"
-                  rows="30"
-                  [(ngModel)]="contents"
-                  [ngModelOptions]="{ standalone: true }"
-                ></textarea>
-              </div>
-              <br /><br />
-              <input type="submit" value="기사 업로드" />
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+      <br />
+
+      <mat-form-field appearance="fill" style="min-width: 1000px">
+        <mat-label>카테고리</mat-label>
+        <mat-select [(value)]="category">
+          <mat-option value="정치">정치</mat-option>
+          <mat-option value="경제">경제</mat-option>
+          <mat-option value="사회">사회</mat-option>
+          <mat-option value="생활/문화">생활/문화</mat-option>
+          <mat-option value="세계">세계</mat-option>
+          <mat-option value="IT/과학">IT/과학</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <br />
+
+      <mat-form-field appearance="fill" style="min-width: 1000px">
+        <mat-label>내용</mat-label>
+        <textarea
+          matInput
+          [(ngModel)]="contents"
+          [ngModelOptions]="{ standalone: true }"
+          cdkTextareaAutosize
+          cdkAutosizeMinRows="40"
+          cdkAutosizeMaxRows="60"
+        >
+        </textarea>
+      </mat-form-field>
+
+      <br /><br />
+      <button type="submit" color="primary" mat-raised-button>
+        기사 업로드
+      </button>
+
+    </form>
+  </mat-card>
 </section>

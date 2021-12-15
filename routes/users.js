@@ -130,5 +130,30 @@ router.post('/updateUser', (req, res) => {
     });
 });
 
+<<<<<<< HEAD
+=======
+//구독
+router.post('/goSubscribe', (req, res) => {
+    User.findOne({ username: req.body.username }, (err, doc) => {
+        if (err) {
+            console.log(err);
+            return res.json({ success: false, msg: '조회 오류 발생' });
+        } else {
+            if (doc) {
+                if (req.body.type == 'reporter') {
+                    console.log(doc);
+                    doc.subscribe_rep.push(req.body.value);
+                } else if (req.body.type == 'company') {
+                    doc.subscribe_com.push(req.body.value);
+                }
+                doc.save();
+                return res.json({ success: true, msg: '구독' });
+            } else {
+                return res.json({ success: false, msg: '해당 사용자 없음' });
+            }
+        }
+    });
+});
+>>>>>>> 86e53e996083198a0b579da1b7564e49bc705f09
 
 module.exports = router;
