@@ -3,8 +3,13 @@
 <hr size="10px" />
 
 <br /><br />
-
-<body class="bg-light">
+<div *ngIf="checkSub">
+    test
+</div>
+<div *ngIf="!checkSub">
+    <button class="btn btn-info" (click)="goSubscribe()">구독</button>
+</div>
+<div class="bg-light">
     <div class="container">
         <div class="row text-center">
             <div class="col-md-2 order-md-2 mb-4">
@@ -108,4 +113,4 @@
             </div>
         </div>
     </div>
-</body>
+</div>

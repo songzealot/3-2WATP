@@ -18,18 +18,19 @@ export class ReporterComponent implements OnInit {
     private activatedRouter: ActivatedRoute,
     private authService: AuthService
   ) { }
-
+  username: string;
   reporter: any;
   postList: any;
   count: any;
+  checkSub: boolean;
 
   ngOnInit(): void {
+
     this.activatedRouter.queryParams.subscribe((params) => {
       if (!params.r) {
         this.flashMessage.show("잘못된 접근", { cssClass: 'alert-danger', timeout: 3000 });
         this.router.navigate(['/']);
       } else {
-        this.reporter = params.r;
         let categoryNum;
         if (!params.cate) {
           categoryNum = 1
@@ -50,6 +51,8 @@ export class ReporterComponent implements OnInit {
       }
     });
 
+    this.checkSubscribe();
+
   }
 
 
@@ -64,21 +67,23 @@ export class ReporterComponent implements OnInit {
     });
   }
 
+  // 기자 정보 확인
   getReporterInfo(username) {
     this.authService.getReporterInfo(username).subscribe((data) => {
       if (data.success) {
         this.reporter = data.reporter;
-        console.log(this.reporter);
       } else {
         this.flashMessage.show(data.msg, { cssClass: 'alert-danger', timeout: 3000 });
       }
     });
   }
 
+  // 기사 보기
   redirectPost(post_id) {
     this.router.navigate([`/postView`], { queryParams: { _id: post_id } });
   }
 
+  // 기사 날짜
   dateString(date1) {
     var date = new Date(date1);
     var year = date.getFullYear();
@@ -90,5 +95,41 @@ export class ReporterComponent implements OnInit {
 
     var dateString = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
     return dateString;
+  }
+
+  checkLoggedIn(): boolean {
+    return this.authService.loggedIn();
+  }
+  // 구독 중인지 확인
+  checkSubscribe() {
+    this.authService.getProfile().subscribe((data) => {
+      this.username = data.user.username;
+      if (data.user.subscribe_rep.includes(this.reporter.username)) {
+        this.checkSub = true;
+      } else {
+        this.checkSub = false;
+      }
+    });
+  }
+
+  goSubscribe() {
+    if (this.checkLoggedIn()) {
+      let forSub = {
+        type: 'reporter',
+        value: this.reporter.username,
+        username: this.username
+      }
+      console.log(forSub);
+      this.authService.goSubscribe(forSub).subscribe((data) => {
+        if (data.success) {
+          this.flashMessage.show(data.msg, { cssClass: 'alert-success', timeout: 3000 });
+          location.reload();
+        } else {
+          this.flashMessage.show(data.msg, { cssClass: 'alert-danger', tiemout: 3000 });
+        }
+      });
+    } else {
+      this.flashMessage.show('로그인이 필요합니다.', { cssClass: 'alert-danger', timeout: 3000 });
+    }
   }
 }
