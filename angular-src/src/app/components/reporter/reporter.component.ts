@@ -116,7 +116,7 @@ export class ReporterComponent implements OnInit {
     if (this.checkLoggedIn()) {
       let forSub = {
         type: 'reporter',
-        value: this.reporter.username,
+        value: this.reporter.nickname,
         username: this.username
       }
       console.log(forSub);

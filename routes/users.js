@@ -157,7 +157,6 @@ router.post('/updateUser', (req, res) => {
 
 //구독
 router.post('/goSubscribe', (req, res) => {
-    console.log(req.body);
     User.findOne({ username: req.body.username }, (err, doc) => {
         if (err) {
             console.log(err);
