@@ -31,9 +31,12 @@ export class PostViewComponent implements OnInit {
   newspaper_company: string;
 
   comment_content: string;
+  comment_re: string;
 
   commentList: any;
   nicknameCheck: string;
+
+  reComment_id: string;
 
   ngOnInit(): void {
     //get 파라미터 받아오기 - json으로 출력
@@ -85,7 +88,7 @@ export class PostViewComponent implements OnInit {
     var dateString = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
     return dateString;
   }
-
+  // 기사 추천
   countUpLike() {
     if (this.authService.loggedIn()) {
       this.authService.getProfile().subscribe((data) => {
@@ -103,22 +106,31 @@ export class PostViewComponent implements OnInit {
       this.flashMessage.show('로그인이 필요합니다', { cssClass: 'alert-danger', timeout: 3000 });
     }
   }
-
-  addComment() {
+  // 댓글 추가
+  addComment(type) {
     if (this.authService.loggedIn()) {
       this.authService.getProfile().subscribe((data) => {
+        let contents_temp;
+        if (type == 'co') {
+          contents_temp = this.comment_content
+        } else if (type == 're') {
+          contents_temp = this.comment_re
+        }
         const comment = {
-          contents: this.comment_content,
+          contents: contents_temp,
           writer: data.user.nickname,
-          target: this.postId
+          target: this.postId,
+          commentType: type
         }
         this.postService.addComment(comment).subscribe((data) => {
           if (data.success) {
             //this.flashMessage.show(data.msg, { cssClass: 'alert-success', timeout: 3000 });
-            location.reload();
+            //location.reload();
+            //return data.comment._id;
           } else {
             this.flashMessage.show(data.msg, { cssClass: 'alert-danger', timeout: 3000 });
             location.reload();
+            return;
           }
         });
       });
@@ -126,7 +138,7 @@ export class PostViewComponent implements OnInit {
       this.flashMessage.show('로그인이 필요합니다.', { cssClass: 'alert-danger', timeout: 3000 });
     }
   }
-
+  // 댓글 추천
   commentLike(_id) {
     if (this.authService.loggedIn()) {
       this.authService.getProfile().subscribe((data) => {
@@ -142,7 +154,7 @@ export class PostViewComponent implements OnInit {
       this.flashMessage.show('로그인이 필요합니다.', { cssClass: 'alert-danger', timeout: 3000 });
     }
   }
-
+  // 댓글 삭제
   commentDelete(_id, writer) {
     if (this.authService.loggedIn()) {
       this.authService.getProfile().subscribe((data) => {
@@ -160,6 +172,13 @@ export class PostViewComponent implements OnInit {
         }
       });
     }
+  }
+
+  // 대댓글
+  addReComment(_id, type) {
+    let temp = this.addComment(type);
+    console.log(_id);
+    //console.log(temp);
   }
 
 }

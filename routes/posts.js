@@ -120,7 +120,7 @@ router.post('/addComment', (req, res) => {
         target: req.body.target,
         contents: req.body.contents,
         like: 0,
-        commentType: 'co'
+        commentType: req.body.commentType
     });
     newComment.save((err) => {
         if (err) {
@@ -133,7 +133,7 @@ router.post('/addComment', (req, res) => {
                 } else {
                     doc.comment_count = doc.comment_count + 1;
                     doc.save();
-                    return res.json({ success: true, msg: "댓글 추가됨" });
+                    return res.json({ success: true, msg: "댓글 추가됨", comment: newComment });
                 }
             });
         }
@@ -214,4 +214,8 @@ router.post('/commentDelete', (req, res) => {
         }
     });
 });
+
+router.post('/addCommentList', (req, res) => {
+
+})
 module.exports = router;

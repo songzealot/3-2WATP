@@ -38,7 +38,7 @@
 <br>
 <div>
     <h3 class="text-center">댓글</h3>
-    <form (ngSubmit)="addComment()">
+    <form (ngSubmit)="addComment('co')">
         <div class="row">
             <div class="col-2">
             </div>
@@ -54,14 +54,19 @@
 </div>
 
 <div>
-    <div *ngFor="let list1 of commentList">
+    <div *ngFor="let list1 of commentList; let i=index">
         {{list1.writer}} &nbsp; {{list1.contents}} &nbsp; {{dateString(list1.comment_date)}} &nbsp; 추천: {{list1.like}}
         <button *ngIf='list1.commentType=="co"' (click)="commentLike(list1._id)">추천</button>
-
         <button *ngIf='list1.writer==nicknameCheck' (click)="commentDelete(list1._id,list1.writer)">삭제</button>
+        <!-- 대댓글 기능 미완성으로 비활성화 -->
+        <!-- <form (ngSubmit)="addReComment(list1._id,'re')">
+            <input type="text" [(ngModel)]="comment_re" [ngModelOptions]="{ standalone: true }">
+            <input type="submit" class="btn btn-secondary" value="댓글 입력">
+        </form>
         <div *ngFor="let list2 of list1.re">
             {{list2.writer}} &nbsp; {{list2.contents}} &nbsp; {{dateString(list2.comment_date)}} &nbsp; 추천:
             {{list2.like}}
-        </div>
+            <button *ngIf='list2.writer==nicknameCheck' (click)="commentDelete(list2._id,list2.writer)">삭제</button>
+        </div> -->
     </div>
 </div>
