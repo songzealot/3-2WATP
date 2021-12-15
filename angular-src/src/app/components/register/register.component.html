@@ -11,163 +11,88 @@
         <div class="card shadow-2-strong" style="border-radius: 1rem">
           <div class="card-body p-5 text-center">
             <form (ngSubmit)="onRegisterSubmit()">
-              <div>
-                계정 유형
-                <div>
-                  <br />
-                  <div class="form-check form-check-inline">
-                    <label>
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="status"
-                        value="일반"
-                        [(ngModel)]="status"
-                        ng-checked="isChecked"
-                      />
-                      일반
-                    </label>
-                  </div>
-
-                  <div class="form-check form-check-inline">
-                    <label>
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="status"
-                        value="기자"
-                        [(ngModel)]="status"
-                      />
-                      기자
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <br />
-
-              <div class="form-group">
-                <label for="inputUsername">ID</label>
-                <input
-                  type="text"
-                  id="inputUsername"
+              <div
+                mat-dialog-content
+                align="center"
+                style="display: flex; flex-direction: column"
+              >
+                <mat-form-field appearance="fill">
+                  <mat-label>ID</mat-label>
+                  <input matInput
                   [(ngModel)]="username"
-                  [ngModelOptions]="{ standalone: true }"
-                  class="form-control"
-                />
-              </div>
+                  [ngModelOptions]="{ standalone: true }">
+                </mat-form-field>
 
-              <br />
-              <div class="form-group">
-                <label for="inputPassword">비밀번호</label>
-                <input
-                  type="password"
-                  id="inputPassword"
+                <mat-form-field appearance="fill">
+                  <mat-label>비밀번호</mat-label>
+                  <input matInput
                   [(ngModel)]="password"
-                  [ngModelOptions]="{ standalone: true }"
-                  class="form-control"
-                />
-              </div>
+                  [ngModelOptions]="{ standalone: true }" 
+                  type="password" />
+                </mat-form-field>
 
-              <br />
-
-              <div class="form-group">
-                <label for="inputPwchk">비밀번호 확인</label>
-                <input
-                  type="password"
-                  id="inputPwchk"
+                <mat-form-field appearance="fill">
+                  <mat-label>비밀번호 확인</mat-label>
+                  <input matInput 
                   [(ngModel)]="passwordCheck"
-                  [ngModelOptions]="{ standalone: true }"
-                  class="form-control"
-                />
+                  [ngModelOptions]="{ standalone: true }"  
+                  type="password" />
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                  <mat-label>닉네임</mat-label>
+                  <input matInput 
+                  [(ngModel)]="nickname" 
+                  [ngModelOptions]="{ standalone: true }" />
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                  <mat-label>나이</mat-label>
+                  <mat-select 
+                  [(value)]="age" >
+                    <mat-option value="20세 미만">20세 미만</mat-option>
+                    <mat-option value="20대">20대</mat-option>
+                    <mat-option value="30대">30대</mat-option>
+                    <mat-option value="40대">40대</mat-option>
+                    <mat-option value="50대">50대</mat-option>
+                    <mat-option value="60세 이상">60세 이상</mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                  <mat-label>성별</mat-label>
+                  <mat-select 
+                  [(value)]="gender">
+                    <mat-option value="남자">남자</mat-option>
+                    <mat-option value="여자">여자</mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                  <mat-label>계정유형</mat-label>
+                  <mat-select 
+                  [(value)]="status">
+                    <mat-option value="기자">기자</mat-option>
+                    <mat-option value="일반">일반</mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <mat-form-field *ngIf="status == '기자'" appearance="fill">
+                  <mat-label>소속 신문사</mat-label>
+                  <mat-select 
+                  [(value)]="newspaper_company">
+                    <mat-option value="Alpha">Alpha</mat-option>
+                    <mat-option value="Bravo">Bravo</mat-option>
+                    <mat-option value="Crawling">Crawling</mat-option>
+                    <mat-option value="Delta">Delta</mat-option>
+                    <mat-option value="Echo">Echo</mat-option>
+                    <mat-option value="Foxtrot">Foxtrot</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <button mat-raised-button color="primary" type="submit">
+                  회원가입
+                </button>
               </div>
-
-              <br />
-
-              <div class="form-group">
-                <label for="inputNickname">닉네임</label>
-                <input
-                  type="text"
-                  id="inputNickname"
-                  [(ngModel)]="nickname"
-                  [ngModelOptions]="{ standalone: true }"
-                  class="form-control"
-                />
-              </div>
-
-              <br />
-
-              <div>
-                성별
-                <div class="form-group">
-                  <select
-                    class="form-control input-sm"
-                    id="gender"
-                    [(ngModel)]="gender"
-                    [ngModelOptions]="{ standalone: true }"
-                  >
-                    <option style="text-align: center">
-                      -- Select your Gender --
-                    </option>
-                    <option>남</option>
-                    <option>여</option>
-                  </select>
-                </div>
-              </div>
-
-              <br />
-
-              <div>
-                나이
-                <div class="form-group">
-                  <select
-                    class="form-control input-sm"
-                    id="age"
-                    [(ngModel)]="age"
-                    [ngModelOptions]="{ standalone: true }"
-                  >
-                    <option style="text-align: center">
-                      -- Select your Age --
-                    </option>
-                    <option>~19</option>
-                    <option>20~24</option>
-                    <option>25~29</option>
-                    <option>30~34</option>
-                    <option>35~39</option>
-                    <option>40~49</option>
-                    <option>50~59</option>
-                    <option>60~</option>
-                  </select>
-                </div>
-              </div>
-
-              <br />
-
-              <div *ngIf="status == '기자'">
-                신문사
-                <div class="form-group">
-                  <select
-                    class="form-control input-sm"
-                    id="newspaper_company"
-                    [(ngModel)]="newspaper_company"
-                    [ngModelOptions]="{ standalone: true }"
-                  >
-                    <option style="text-align: center">
-                      -- Select your Age --
-                    </option>
-                    <option>Alpha</option>
-                    <option>Bravo</option>
-                    <option>Crawling</option>
-                    <option>Delta</option>
-                    <option>Echo</option>
-                    <option>Foxtrot</option>
-                  </select>
-                </div>
-                <br>
-              </div>
-
-              <br />
-
-              <input type="submit" class="btn btn-primary" value="회원가입" />
             </form>
           </div>
         </div>

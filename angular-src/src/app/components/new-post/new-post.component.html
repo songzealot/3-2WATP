@@ -1,9 +1,3 @@
-<hr size="10px" />
-<br /><br /><br /><br />
-<h1 class="page-header" style="text-align: center">기사 작성</h1>
-<br /><br /><br /><br />
-<hr size="10px" />
-
 <section>
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -12,6 +6,7 @@
           <div class="card-body p-5 text-center">
             <form (ngSubmit)="onPostSubmit()">
               <div class="form-group">
+
                 <label for="title">제목</label>
                 <br />
                 <input
@@ -45,7 +40,7 @@
                 <textarea
                   class="form-control"
                   id="exampleFormControlTextarea1"
-                  rows="3"
+                  rows="30"
                   [(ngModel)]="contents"
                   [ngModelOptions]="{ standalone: true }"
                 ></textarea>

@@ -6,22 +6,32 @@
 
 <div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
   <div class="card p-4">
-    <div class="image d-flex flex-column justify-content-center align-items-center">
+    <div
+      class="image d-flex flex-column justify-content-center align-items-center"
+    >
       <button class="btn btn-secondary">
         <img src="../../../assets/image/test.png" height="150" width="150" />
       </button>
       <br />
-      <span class="name">닉네임: {{nickname}}</span>
+      <span class="name">닉네임: {{ nickname }}</span>
       <br />
-      <span class="age">연령대: {{age}}</span>
+      <span class="age">연령대: {{ age }}</span>
       <br />
-      <span class="gender">성별: {{gender}}</span>
+      <span class="gender">성별: {{ gender }}</span>
       <br />
-      <span class="status">계정 유형: {{status}}</span>
+      <span class="status">계정 유형: {{ status }}</span>
       <br />
-      <span class="newspaper_company" *ngIf="status=='기자'">소속 신문사: {{newspaper_company}}</span>
+      <span class="newspaper_company" *ngIf="status == '기자'"
+        >소속 신문사: {{ newspaper_company }}</span
+      >
       <br />
-      <button class="btn1 btn-dark">프로필 수정</button>
+
+      <button 
+      mat-raised-button 
+      color = "primary"
+      (click)="openDialog()">
+        프로필 수정
+      </button>
     </div>
   </div>
 </div>

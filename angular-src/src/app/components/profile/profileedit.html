@@ -1,0 +1,58 @@
+<h1 mat-dialog-title>프로필 수정</h1>
+
+<div
+  mat-dialog-content
+  align="center"
+  style="display: flex; flex-direction: column"
+>
+  <form (ngSubmit)="pfeditSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>이름</mat-label>
+      <input matInput [(ngModel)]="data.nickname" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>나이</mat-label>
+      <mat-select [(value)]="data.age">
+        <mat-option value="20세 미만">20세 미만</mat-option>
+        <mat-option value="20대">20대</mat-option>
+        <mat-option value="30대">30대</mat-option>
+        <mat-option value="40대">40대</mat-option>
+        <mat-option value="50대">50대</mat-option>
+        <mat-option value="60세 이상">60세 이상</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>성별</mat-label>
+      <mat-select [(value)]="data.gender">
+        <mat-option value="남자">남자</mat-option>
+        <mat-option value="여자">여자</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>계정유형</mat-label>
+      <mat-select [(value)]="data.status">
+        <mat-option value="기자">기자</mat-option>
+        <mat-option value="일반">일반</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="data.status == '기자'" appearance="fill">
+      <mat-label>소속 신문사</mat-label>
+      <mat-select [(value)]="data.newspaper_company">
+        <mat-option value="Alpha">Alpha</mat-option>
+        <mat-option value="Bravo">Bravo</mat-option>
+        <mat-option value="Crawling">Crawling</mat-option>
+        <mat-option value="Delta">Delta</mat-option>
+        <mat-option value="Echo">Echo</mat-option>
+        <mat-option value="Foxtrot">Foxtrot</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close>취소</button>
+      <button type="submit" color="primary" mat-raised-button>변경</button>
+    </mat-dialog-actions>
+  </form>
+</div>
