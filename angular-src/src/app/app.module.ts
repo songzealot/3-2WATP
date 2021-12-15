@@ -20,6 +20,7 @@ import { NewPostComponent } from './components/new-post/new-post.component';
 import { PostViewComponent } from './components/post-view/post-view.component';
 import { CompanyComponent } from './components/company/company.component';
 import { ReporterComponent } from './components/reporter/reporter.component';
+import { SubscribeComponent } from './components/subscribe/subscribe.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ReporterComponent } from './components/reporter/reporter.component';
     NewPostComponent,
     PostViewComponent,
     CompanyComponent,
-    ReporterComponent
+    ReporterComponent,
+    SubscribeComponent
   ],
   imports: [
     BrowserModule,
