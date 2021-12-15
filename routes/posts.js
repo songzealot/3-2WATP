@@ -57,7 +57,7 @@ router.post('/newsList', async (req, res) => {
     res.json({ postList: list, sortByViewList: sortedList });
 });
 
-// 신문사, 카테고리별 기사 목록
+// 신문사, 카테고리별 기사 목록 + 기자 추가
 router.post('/companyPost', async (req, res) => {
     const category = req.body.category;
     let list;

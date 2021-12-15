@@ -32,6 +32,14 @@ const UserSchema = mongoose.Schema({
     newspaper_company: {
         type: String,
         required: false
+    },
+    subscribe_com: {
+        type: Array,
+        required: false
+    },
+    subscribe_rep: {
+        type: Array,
+        required: false
     }
 });
 

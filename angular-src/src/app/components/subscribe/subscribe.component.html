@@ -1,1 +1,42 @@
-<p>subscribe works!</p>
+<div class="container text-center">
+    <div class="row">
+        <div class="col">
+            <h3>구독중인 신문사</h3>
+            <div *ngFor="let list of postList_company">
+                <div>
+                    <h4>list.target</h4>
+                </div>
+                <div>
+                    <div>
+                        list.postList[0].title &nbsp; dateString(list.postList[0].post_date)
+                    </div>
+                    <div>
+                        list.postList[1].title &nbsp; dateString(list.postList[1].post_date)
+                    </div>
+                    <div>
+                        list.postList[2].title &nbsp; dateString(list.postList[2].post_date)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <h3>구독중인 기자</h3>
+            <div *ngFor="let list of postList_reporter">
+                <div>
+                    <h4>list.target</h4>
+                </div>
+                <div>
+                    <div>
+                        list.postList[0].title &nbsp; dateString(list.postList[0].post_date)
+                    </div>
+                    <div>
+                        list.postList[1].title &nbsp; dateString(list.postList[1].post_date)
+                    </div>
+                    <div>
+                        list.postList[2].title &nbsp; dateString(list.postList[2].post_date)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

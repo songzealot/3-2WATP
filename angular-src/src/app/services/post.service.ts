@@ -55,22 +55,22 @@ export class PostService {
     const registerUrl = this.prepEndPoint('posts/addComment');
     return this.http.post(registerUrl, comment, httpOptions);
   }
-
+  // 댓글 표시
   commentView(_id): Observable<any> {
     const registerUrl = this.prepEndPoint('posts/commentView');
     return this.http.post(registerUrl, { _id: _id }, httpOptions);
   }
-
+  // 댓글 추천
   commentLike(_id, nickname): Observable<any> {
     const registerUrl = this.prepEndPoint('posts/commentLike');
     return this.http.post(registerUrl, { _id: _id, nickname: nickname }, httpOptions);
   }
-
+  // 댓글 삭제
   commentDelete(_id): Observable<any> {
     const registerUrl = this.prepEndPoint('posts/commentDelete');
     return this.http.post(registerUrl, { _id: _id }, httpOptions);
   }
-
+  // 기사 개수
   postCount(forCount): Observable<any> {
     const registerUrl = this.prepEndPoint('posts/postCount');
     return this.http.post(registerUrl, forCount, httpOptions);
