@@ -122,7 +122,23 @@ router.post('/reporterInfo', (req, res) => {
         } else {
             return res.json({ success: true, reporter: doc, msg: '기자 조회됨' });
         }
-    })
+    });
+});
+
+router.post('/updateUser', (req, res) => {
+    User.find({ username: req.body.username }, (err, doc) => {
+        if (err) {
+            console.log(err);
+            return res.json({ success: false, msg: '조회 오류 발생' });
+        } else {
+            if (doc) {
+                doc.save();
+                return res.json({ success: true, msg: '사용자 정보 수정됨' });
+            } else {
+                return res.json({ success: false, msg: '해당 사용자 없음' });
+            }
+        }
+    });
 })
 
 module.exports = router;
