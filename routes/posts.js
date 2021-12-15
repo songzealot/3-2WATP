@@ -60,24 +60,23 @@ router.post('/newsList', async (req, res) => {
 // 신문사, 카테고리별 기사 목록
 router.post('/companyPost', async (req, res) => {
     const category = req.body.category;
-    const company = req.body.company;
     let list;
     if (category == 1) {
-        list = await Article.find({ newspaper_company: company }).sort('-post_date');
+        list = await Article.find({}).where(req.body.type).equals(req.body.value).sort('-post_date');
     } else if (category == 2) {
-        list = await Article.find({ newspaper_company: company }).where('category').equals('정치').sort('-post_date');
+        list = await Article.find({ category: '정치' }).where(req.body.type).equals(req.body.value).sort('-post_date');
     } else if (category == 3) {
-        list = await Article.find({ newspaper_company: company }).where('category').equals('경제').sort('-post_date');
+        list = await Article.find({ category: '경제' }).where(req.body.type).equals(req.body.value).sort('-post_date');
     } else if (category == 4) {
-        list = await Article.find({ newspaper_company: company }).where('category').equals('사회').sort('-post_date');
+        list = await Article.find({ category: '사회' }).where(req.body.type).equals(req.body.value).sort('-post_date');
     } else if (category == 5) {
-        list = await Article.find({ newspaper_company: company }).where('category').equals('생활/문화').sort('-post_date');
+        list = await Article.find({ category: '생활/문화' }).where(req.body.type).equals(req.body.value).sort('-post_date');
     } else if (category == 6) {
-        list = await Article.find({ newspaper_company: company }).where('category').equals('세계').sort('-post_date');
+        list = await Article.find({ category: '세계' }).where(req.body.type).equals(req.body.value).sort('-post_date');
     } else if (category == 7) {
-        list = await Article.find({ newspaper_company: company }).where('category').equals('IT/과학').sort('-post_date');
+        list = await Article.find({ category: 'IT/과학' }).where(req.body.type).equals(req.body.value).sort('-post_date');
     }
-    res.json({ companyPost: list });
+    res.json({ postList: list });
 });
 
 // 기사 좋아요 추가
@@ -180,6 +179,7 @@ router.post('/commentLike', (req, res) => {
     });
 });
 
+// 댓삭
 router.post('/commentDelete', (req, res) => {
     const _id = mongoose.Types.ObjectId(String(req.body._id));
     Comment.findById(_id, (err, doc) => {
@@ -220,16 +220,16 @@ router.post('/addCommentList', (req, res) => {
 
 })
 
-// 회사별 기사 수
+// 회사별, 기자별 기사 수
 router.post('/postCount', async (req, res) => {
     let count = [];
-    count[0] = await Article.count({ newspaper_company: req.body.company });
-    count[1] = await Article.count({ newspaper_company: req.body.company, category: '정치' });
-    count[2] = await Article.count({ newspaper_company: req.body.company, category: '경제' });
-    count[3] = await Article.count({ newspaper_company: req.body.company, category: '사회' });
-    count[4] = await Article.count({ newspaper_company: req.body.company, category: '생활/문화' });
-    count[5] = await Article.count({ newspaper_company: req.body.company, category: '세계' });
-    count[6] = await Article.count({ newspaper_company: req.body.company, category: 'IT/과학' });
+    count[0] = await Article.count({}).where(req.body.type).equals(req.body.value);
+    count[1] = await Article.count({ category: '정치' }).where(req.body.type).equals(req.body.value);
+    count[2] = await Article.count({ category: '경제' }).where(req.body.type).equals(req.body.value);
+    count[3] = await Article.count({ category: '사회' }).where(req.body.type).equals(req.body.value);
+    count[4] = await Article.count({ category: '생활/문화' }).where(req.body.type).equals(req.body.value);
+    count[5] = await Article.count({ category: '세계' }).where(req.body.type).equals(req.body.value);
+    count[6] = await Article.count({ category: 'IT/과학' }).where(req.body.type).equals(req.body.value);
     return res.json({ count: count });
 });
 

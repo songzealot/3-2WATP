@@ -39,9 +39,9 @@ export class PostService {
   }
 
   // 신문사, 카테고리별 기사 목록
-  postCompany(company, category): Observable<any> {
+  postCompany(forPost): Observable<any> {
     const registerUrl = this.prepEndPoint('posts/companyPost');
-    return this.http.post(registerUrl, { company: company, category: category }, httpOptions);
+    return this.http.post(registerUrl, forPost, httpOptions);
   }
 
   // 기사 좋아요
@@ -71,8 +71,8 @@ export class PostService {
     return this.http.post(registerUrl, { _id: _id }, httpOptions);
   }
 
-  postCount(company): Observable<any> {
+  postCount(forCount): Observable<any> {
     const registerUrl = this.prepEndPoint('posts/postCount');
-    return this.http.post(registerUrl, { company: company }, httpOptions);
+    return this.http.post(registerUrl, forCount, httpOptions);
   }
 }

@@ -1,1 +1,111 @@
-<p>reporter works!</p>
+<hr size="10px" />
+<h1 class="text-center">{{reporter.newspaper_company}} - {{reporter.nickname}}({{reporter.username}})</h1>
+<hr size="10px" />
+
+<br /><br />
+
+<body class="bg-light">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-2 order-md-2 mb-4">
+                <br />
+                <h4 class="justify-content-between align-items-center mb-3">
+                    <span class="text-muted">Category</span>
+                </h4>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item  justify-content-between lh-condensed">
+                        <div>
+                            <h6 class="my-0"><a class="nav-link link-dark" href="/reporter?r={{reporter}}&cate=1"
+                                    style="cursor: pointer">전체</a>
+                            </h6>
+                            <small class="text-muted">{{count[0]}}</small>
+                        </div>
+                    </li>
+                    <li class="list-group-item  justify-content-between lh-condensed">
+                        <div>
+                            <h6 class="my-0"><a class="nav-link link-dark" href="/reporter?r={{reporter}}&cate=2"
+                                    style="cursor: pointer">정치</a>
+                            </h6>
+                            <small class="text-muted">{{count[1]}}</small>
+                        </div>
+                    </li>
+                    <li class="list-group-item  justify-content-between lh-condensed">
+                        <div>
+                            <h6 class="my-0"><a class="nav-link link-dark" href="/reporter?r={{reporter}}&cate=3"
+                                    style="cursor: pointer">경제</a>
+                            </h6>
+                            <small class="text-muted">{{count[2]}}</small>
+                        </div>
+                    </li>
+                    <li class="list-group-item  justify-content-between lh-condensed">
+                        <div>
+                            <h6 class="my-0"><a class="nav-link link-dark" href="/reporter?r={{reporter}}&cate=4"
+                                    style="cursor: pointer">사회</a>
+                            </h6>
+                            <small class="text-muted">{{count[3]}}</small>
+                        </div>
+                    </li>
+                    <li class="list-group-item  justify-content-between lh-condensed">
+                        <div>
+                            <h6 class="my-0"><a class="nav-link link-dark" href="/reporter?r={{reporter}}&cate=5"
+                                    style="cursor: pointer">생활/문화</a>
+                            </h6>
+                            <small class="text-muted">{{count[4]}}</small>
+                        </div>
+                    </li>
+                    <li class="list-group-item  justify-content-between lh-condensed">
+                        <div>
+                            <h6 class="my-0"><a class="nav-link link-dark" href="/reporter?r={{reporter}}&cate=6"
+                                    style="cursor: pointer">세계</a>
+                            </h6>
+                            <small class="text-muted">{{count[5]}}</small>
+                        </div>
+                    </li>
+                    <li class="list-group-item  justify-content-between lh-condensed">
+                        <div>
+                            <h6 class="my-0"><a class="nav-link link-dark" href="/reporter?r={{reporter}}&cate=7"
+                                    style="cursor: pointer">IT/과학</a>
+                            </h6>
+                            <small class="text-muted">{{count[6]}}</small>
+                        </div>
+                    </li>
+                </ul>
+
+                <br />
+
+            </div>
+
+            <div class="col-md-10 order-md-1">
+                <br />
+                <h4 class="mb-3">기사</h4>
+                <form>
+                    <div class="card">
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th scope="col" style="width: 49%">제목</th>
+                                        <th scope="col" style="width: 10%">날짜</th>
+                                        <th scope="col" style="width: 10%">작성자</th>
+                                        <th scope="col" style="width: 7%">조회수</th>
+                                        <th scope="col" style="width: 7%">추천수</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="text-center" *ngFor="let postNumber of postList"
+                                        (click)="redirectPost(postNumber._id)" style="cursor: pointer">
+                                        <td>[{{postNumber.category}}] {{postNumber.title}}</td>
+                                        <td>{{dateString(postNumber.post_date)}}</td>
+                                        <td>{{postNumber.reporter}}</td>
+                                        <td>{{postNumber.view}}</td>
+                                        <td>{{postNumber.like}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>

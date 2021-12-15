@@ -77,5 +77,10 @@ export class AuthService {
     return this.http.post(profileUrl, { company: company }, httpOptions);
   }
 
+  //기자 정보 가져오기
+  getReporterInfo(username): Observable<any> {
+    const profileUrl = this.prepEndPoint('users/reporterInfo');
+    return this.http.post(profileUrl, { username: username }, httpOptions);
+  }
 }
 

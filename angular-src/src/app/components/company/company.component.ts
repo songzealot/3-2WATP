@@ -39,8 +39,13 @@ export class CompanyComponent implements OnInit {
         } else {
           categoryNum = params.cate
         }
-        this.postService.postCompany(this.newsCompany, categoryNum).subscribe((data) => {
-          this.postList = data.companyPost;
+        const temp = {
+          type: 'newspaper_company',
+          value: this.newsCompany,
+          category: categoryNum
+        }
+        this.postService.postCompany(temp).subscribe((data) => {
+          this.postList = data.postList;
         });
       }
     });
@@ -78,7 +83,11 @@ export class CompanyComponent implements OnInit {
 
   //기사 개수
   postCount(company) {
-    this.postService.postCount(company).subscribe((data) => {
+    const temp = {
+      type: 'newspaper_company',
+      value: company
+    }
+    this.postService.postCount(temp).subscribe((data) => {
       this.count = data.count;
     });
   }

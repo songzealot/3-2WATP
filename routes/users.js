@@ -113,5 +113,16 @@ router.post('/reporterList', (req, res) => {
     });
 });
 
+//기자 정보 가져오기
+router.post('/reporterInfo', (req, res) => {
+    User.findOne({ username: req.body.username }, (err, doc) => {
+        if (err) {
+            console.log(err);
+            return res.json({ success: false, msg: '조회 오류 발생' });
+        } else {
+            return res.json({ success: true, reporter: doc, msg: '기자 조회됨' });
+        }
+    })
+})
 
 module.exports = router;
