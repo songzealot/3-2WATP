@@ -56,6 +56,9 @@
 <div>
     <div *ngFor="let list1 of commentList">
         {{list1.writer}} &nbsp; {{list1.contents}} &nbsp; {{dateString(list1.comment_date)}} &nbsp; 추천: {{list1.like}}
+        <button *ngIf='list1.commentType=="co"' (click)="commentLike(list1._id)">추천</button>
+
+        <button *ngIf='list1.writer==nicknameCheck' (click)="commentDelete(list1._id,list1.writer)">삭제</button>
         <div *ngFor="let list2 of list1.re">
             {{list2.writer}} &nbsp; {{list2.contents}} &nbsp; {{dateString(list2.comment_date)}} &nbsp; 추천:
             {{list2.like}}

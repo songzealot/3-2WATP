@@ -60,4 +60,14 @@ export class PostService {
     const registerUrl = this.prepEndPoint('posts/commentView');
     return this.http.post(registerUrl, { _id: _id }, httpOptions);
   }
+
+  commentLike(_id, nickname): Observable<any> {
+    const registerUrl = this.prepEndPoint('posts/commentLike');
+    return this.http.post(registerUrl, { _id: _id, nickname: nickname }, httpOptions);
+  }
+
+  commentDelete(_id): Observable<any> {
+    const registerUrl = this.prepEndPoint('posts/commentDelete');
+    return this.http.post(registerUrl, { _id: _id }, httpOptions);
+  }
 }

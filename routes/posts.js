@@ -89,21 +89,21 @@ router.post('/likeUp', (req, res) => {
             return res.json({ success: false, msg: "오류 발생" });
         } else {
             if (doc) {
-                if (!doc.likeUser) {
-                    doc.likeUser = [req.body.nickname];
+                // if (!doc.likeUser) {
+                //     doc.likeUser = [req.body.nickname];
+                //     doc.like = doc.like + 1;
+                //     doc.save();
+                //     return res.json({ success: true, msg: "첫번째 좋아요" });
+                // } else {
+                if (doc.likeUser.includes(req.body.nickname)) {
+                    return res.json({ success: false, msg: "이미 추천한 기사입니다." });
+                } else {
+                    doc.likeUser.push(req.body.nickname);
                     doc.like = doc.like + 1;
                     doc.save();
-                    return res.json({ success: true, msg: "첫번째 좋아요" });
-                } else {
-                    if (doc.likeUser.includes(req.body.nickname)) {
-                        return res.json({ success: false, msg: "이미 추천한 기사입니다." });
-                    } else {
-                        doc.likeUser.push(req.body.nickname);
-                        doc.like = doc.like + 1;
-                        doc.save();
-                        return res.json({ success: true, msg: "좋아요" });
-                    }
+                    return res.json({ success: true, msg: "좋아요" });
                 }
+                // }
             } else {
                 return res.json({ success: false, msg: "존재하지 않는 문서" });
             }
@@ -111,6 +111,7 @@ router.post('/likeUp', (req, res) => {
     });
 });
 
+// 댓글 추가
 router.post('/addComment', (req, res) => {
     const comment_date = new Date();
     const newComment = new Comment({
@@ -121,7 +122,6 @@ router.post('/addComment', (req, res) => {
         like: 0,
         commentType: 'co'
     });
-    console.log(newComment);
     newComment.save((err) => {
         if (err) {
             return res.json({ success: false, msg: "오류 발생1" });
@@ -140,9 +140,10 @@ router.post('/addComment', (req, res) => {
     });
 });
 
+// 댓글 표시
 router.post('/commentView', async (req, res) => {
     const _id = mongoose.Types.ObjectId(String(req.body._id));
-    let list = await Comment.find({ target: _id, commentType: 'co' });
+    let list = await Comment.find({ target: _id }).where('commentType').in(['co', 'de']);
     for (var i in list) {
         list[i].re = [];
         for (reComment of list[i].commentList) {
@@ -159,4 +160,58 @@ router.post('/commentView', async (req, res) => {
     return res.json({ commentList: list });
 });
 
+// 댓글 추천
+router.post('/commentLike', (req, res) => {
+    const _id = mongoose.Types.ObjectId(String(req.body._id));
+    Comment.findById(_id, (err, doc) => {
+        if (err) {
+            console.log(err);
+            return res.json({ success: false, msg: "대댓 추천 오류 발생" });
+        } else {
+            if (doc.likeUser.includes(req.body.nickname)) {
+                return res.json({ success: false, msg: "이미 추천한 댓글입니다." });
+            } else {
+                doc.likeUser.push(req.body.nickname);
+                doc.like = doc.like + 1;
+                doc.save();
+                return res.json({ success: true, msg: "좋아요" });
+            }
+        }
+    });
+});
+
+router.post('/commentDelete', (req, res) => {
+    const _id = mongoose.Types.ObjectId(String(req.body._id));
+    Comment.findById(_id, (err, doc) => {
+        if (err) {
+            console.log(err);
+            return res.json({ success: false, msg: "오류 발생" });
+        } else {
+            const target_id = mongoose.Types.ObjectId(String(doc.target));
+            Article.findById(target_id, (err, doc1) => {
+                if (err) {
+                    console.log(err);
+                    return res.json({ success: false, msg: "오류 발생" });
+                } else {
+                    doc1.comment_count = doc1.comment_count - 1;
+                    doc1.save();
+
+                    if (doc.commentList.length == 0) {
+                        Comment.deleteOne({ _id: _id }, () => {
+                            return res.send({ success: true, msg: '댓글 삭제됨' });
+                        });
+                    } else {
+                        doc.writer = '';
+                        doc.contents = '삭제된 댓글';
+                        doc.like = 0;
+                        doc.likeUser = [];
+                        doc.commentType = 'de';
+                        doc.save();
+                        return res.json({ success: true, msg: "댓글 삭제됨" });
+                    }
+                }
+            });
+        }
+    });
+});
 module.exports = router;

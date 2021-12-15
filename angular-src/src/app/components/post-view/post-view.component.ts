@@ -33,6 +33,7 @@ export class PostViewComponent implements OnInit {
   comment_content: string;
 
   commentList: any;
+  nicknameCheck: string;
 
   ngOnInit(): void {
     //get 파라미터 받아오기 - json으로 출력
@@ -57,8 +58,17 @@ export class PostViewComponent implements OnInit {
       });
     });
 
+    this.authService.getProfile().subscribe((data) => { this.nicknameCheck = data.user.nickname });
+
     this.postService.commentView(this.postId).subscribe((data) => {
-      this.commentList = data.commentList;
+      let temp = data.commentList;
+      for (var i = 0; i < temp.length; i++) {
+        if (temp[i].commentType == "de" && temp[i].commentList.length == 0) {
+          temp.splice(i, 1);
+          i--;
+        }
+      }
+      this.commentList = temp;
     });
 
   }
@@ -116,4 +126,40 @@ export class PostViewComponent implements OnInit {
       this.flashMessage.show('로그인이 필요합니다.', { cssClass: 'alert-danger', timeout: 3000 });
     }
   }
+
+  commentLike(_id) {
+    if (this.authService.loggedIn()) {
+      this.authService.getProfile().subscribe((data) => {
+        this.postService.commentLike(_id, data.user.nickname).subscribe((data) => {
+          if (data.success) {
+            location.reload();
+          } else {
+            this.flashMessage.show(data.msg, { cssClass: 'alert-danger', timeout: 3000 });
+          }
+        });
+      });
+    } else {
+      this.flashMessage.show('로그인이 필요합니다.', { cssClass: 'alert-danger', timeout: 3000 });
+    }
+  }
+
+  commentDelete(_id, writer) {
+    if (this.authService.loggedIn()) {
+      this.authService.getProfile().subscribe((data) => {
+        if (writer == data.user.nickname) {
+          this.postService.commentDelete(_id).subscribe((data) => {
+            if (data.success) {
+              location.reload();
+              //this.flashMessage.show(data.msg, { cssClass: 'alert-success', timeout: 3000 });
+            } else {
+              this.flashMessage.show(data.msg, { cssClass: 'alert-success', timeout: 3000 });
+            }
+          });
+        } else {
+          this.flashMessage.show('본인확인오류', { cssClass: 'alert-danger', timeout: 3000 });
+        }
+      });
+    }
+  }
+
 }
