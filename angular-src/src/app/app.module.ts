@@ -13,7 +13,7 @@ import { FlashMessagesModule, FlashMessagesService } from 'angular2-flash-messag
 import { HttpClientModule } from '@angular/common/http'
 import { AuthService } from './services/auth.service';
 import { JwtModule } from '@auth0/angular-jwt';
-import { ProfileComponent } from './components/profile/profile.component';
+import { ProfileComponent, profileedit } from './components/profile/profile.component';
 import { AuthGuard } from './etc/guards';
 import { NewsListComponent } from './components/news-list/news-list.component';
 import { NewPostComponent } from './components/new-post/new-post.component';
@@ -21,6 +21,24 @@ import { PostViewComponent } from './components/post-view/post-view.component';
 import { CompanyComponent } from './components/company/company.component';
 import { ReporterComponent } from './components/reporter/reporter.component';
 import { SubscribeComponent } from './components/subscribe/subscribe.component';
+import { MatCardModule } from '@angular/material/card';
+
+//angular material 모듈
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatCommonModule } from '@angular/material/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -36,8 +54,10 @@ import { SubscribeComponent } from './components/subscribe/subscribe.component';
     PostViewComponent,
     CompanyComponent,
     ReporterComponent,
-    SubscribeComponent
+    SubscribeComponent,
+    profileedit
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -47,8 +67,27 @@ import { SubscribeComponent } from './components/subscribe/subscribe.component';
     FlashMessagesModule,
     // http 모듈
     HttpClientModule,
-    JwtModule.forRoot({ config: { tokenGetter: () => { return localStorage.getItem('authToken'); } } })
+    JwtModule.forRoot({ config: { tokenGetter: () => { return localStorage.getItem('authToken'); } } }),
+    //브라우저 애니메이션(버튼클릭시 그림자)
+    BrowserAnimationsModule,
+    //mat네브 모듈
+    MatSidenavModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatListModule,
+    MatTabsModule,
+    MatCommonModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatMenuModule,
+    MatRadioModule,
+    MatFormFieldModule,
+    MatDialogModule,
+    MatInputModule,
+    MatSelectModule,
+    MatCardModule,
   ],
+
   providers: [
     // ---- 서비스 추가 ----
     // register 페이지 입력값 검증

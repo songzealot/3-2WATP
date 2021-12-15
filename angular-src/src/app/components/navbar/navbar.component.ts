@@ -8,15 +8,20 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) { }
+  title = 'angular-material-tab-router';
+  navLinks: any[];
+  activeLinkIndex = -1;
+  constructor(private authService: AuthService, private router: Router) { }
 
   status: string;
 
   ngOnInit(): void {
+    this.router.events.subscribe((res) => {
+      this.activeLinkIndex = this.navLinks.indexOf(
+        this.navLinks.find((tab) => tab.link === '.' + this.router.url)
+      );
+    });
+
     if (!this.checkLoggedIn()) {
       this.authService.logout();
     }
@@ -31,5 +36,4 @@ export class NavbarComponent implements OnInit {
   checkLoggedIn(): boolean {
     return this.authService.loggedIn();
   }
-
 }

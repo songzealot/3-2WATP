@@ -11,19 +11,32 @@
         <div class="card shadow-2-strong" style="border-radius: 1rem">
           <div class="card-body p-5 text-center">
             <form (ngSubmit)="onLoginSubmit()">
-              <div class="form-group">
-                <label for="inputID">아이디</label>
-                <input type="text" id="inputID" class="form-control" [(ngModel)]="username"
-                  [ngModelOptions]="{ standalone: true }" />
+              <div
+                mat-dialog-content
+                align="center"
+                style="display: flex; flex-direction: column"
+              >
+                <mat-form-field appearance="fill">
+                  <mat-label>ID</mat-label>
+                  <input
+                    matInput
+                    [(ngModel)]="username"
+                    [ngModelOptions]="{ standalone: true }"
+                  />
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                  <mat-label>비밀번호</mat-label>
+                  <input matInput
+                  [(ngModel)]="password"
+                  [ngModelOptions]="{ standalone: true }" 
+                  type="password" />
+                </mat-form-field>
+                
+                <button mat-raised-button color="primary" type="submit">
+                  로그인
+                </button>
               </div>
-              <br />
-              <div class="form-group">
-                <label for="inputPW">패스워드</label>
-                <input type="password" id="inputPW" class="form-control" [(ngModel)]="password"
-                  [ngModelOptions]="{ standalone: true }" />
-              </div>
-              <br /><br />
-              <input type="submit" value="로그인" class="btn btn-primary" />
             </form>
           </div>
         </div>

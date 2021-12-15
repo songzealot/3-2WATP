@@ -19,9 +19,7 @@ router.get('/profile', passport.authenticate("jwt", { session: false }), (req, r
                 age: req.user.age,
                 gender: req.user.gender,
                 status: req.user.status,
-                newspaper_company: req.user.newspaper_company,
-                subscribe_com: req.user.subscribe_com,
-                subscribe_rep: req.user.subscribe_rep
+                newspaper_company: req.user.newspaper_company
             }
         });
     } else {
@@ -31,9 +29,7 @@ router.get('/profile', passport.authenticate("jwt", { session: false }), (req, r
                 username: req.user.username,
                 age: req.user.age,
                 gender: req.user.gender,
-                status: req.user.status,
-                subscribe_com: req.user.subscribe_com,
-                subscribe_rep: req.user.subscribe_rep
+                status: req.user.status
             }
         });
     }
@@ -58,17 +54,11 @@ router.post('/register', (req, res) => {
         if (user) {
             return res.json({ success: false, msg: "같은 ID 존재" });
         } else {
-            User.find({ nickname: req.body.nickname }, (err, doc) => {
-                if (doc) {
-                    return res.json({ success: false, msg: "같은 닉네임 존재" });
+            User.addUser(newUser, (err, user) => {
+                if (err) {
+                    res.json({ success: false, msg: '회원가입 실패' });
                 } else {
-                    User.addUser(newUser, (err, user) => {
-                        if (err) {
-                            res.json({ success: false, msg: '회원가입 실패' });
-                        } else {
-                            res.json({ success: true, msg: '회원가입 완료' });
-                        }
-                    });
+                    res.json({ success: true, msg: '회원가입 완료' });
                 }
             });
         }
@@ -139,6 +129,7 @@ router.post('/reporterInfo', (req, res) => {
     });
 });
 
+//유저 업데이트
 router.post('/updateUser', (req, res) => {
     User.findOne({ username: req.body.username }, (err, doc) => {
         if (err) {

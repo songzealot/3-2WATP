@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { CompanyComponent } from './components/company/company.component';
 import { HomeComponent } from './components/home/home.component';
@@ -29,8 +30,11 @@ const routes: Routes = [
   { path: 'subscribe', component: SubscribeComponent }
 ];
 
+export const appRouting = RouterModule.forRoot(routes);
+
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes), CommonModule],
+  exports: [RouterModule],
+  declarations: []
 })
 export class AppRoutingModule { }

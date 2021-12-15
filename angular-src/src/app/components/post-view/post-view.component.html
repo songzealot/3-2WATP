@@ -1,65 +1,71 @@
 <hr size="10px" />
 
-<h2 class="pb-3 mb-4 font-italic border-bottom">{{category}} > {{newspaper_company}} > {{reporter}}</h2>
+<h2 class="pb-3 mb-4 font-italic border-bottom">
+  {{ category }} > {{ newspaper_company }} > {{ reporter }}
+</h2>
 
 <div class="card">
-    <div class="card-body">
-        <nav id="navbar-example2" class="navbar navbar-light bg-light px-3">
-            <a class="navbar-brand">
-                <h4>[{{category}}] {{title}}</h4>
-            </a>
-            <ul class="nav nav-pills">
-                <li class="nav-item">&nbsp;작성자: {{reporter}}&nbsp;</li>
-                <li class="nav-item">&nbsp;기사 작성: {{post_date}}&nbsp;</li>
-                <li class="nav-item">&nbsp;조회수: {{view}}&nbsp;</li>
-            </ul>
-        </nav>
+  <div class="card-body">
+    <nav id="navbar-example2" class="navbar navbar-light bg-light px-3">
+      <a class="navbar-brand">
+        <h4>[{{ category }}] {{ title }}</h4>
+      </a>
+      <ul class="nav nav-pills">
+        <li class="nav-item">&nbsp;작성자: {{ reporter }}&nbsp;</li>
+        <li class="nav-item">&nbsp;기사 작성: {{ post_date }}&nbsp;</li>
+        <li class="nav-item">&nbsp;조회수: {{ view }}&nbsp;</li>
+      </ul>
+    </nav>
 
-        <br /><br />
+    <br /><br />
 
-        <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" class="scrollspy-example"
-            tabindex="0">
-            <pre style="font-family: var(--bs-body-font-family); font-size: 1em;">{{contents}}</pre>
-
-        </div>
+    <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" class="scrollspy-example"
+      tabindex="0">
+      <pre style="font-family: var(--bs-body-font-family); font-size: 1em">{{contents}}</pre>
     </div>
+  </div>
 </div>
-<br>
+<br />
 <div class="row">
-    <div class="col text-end">
-        <h4>댓글: {{comment_count}}</h4>
-    </div>
-    <div class="col row">
-        <button class="btn btn-primary col col-2" (click)="countUpLike()">좋아요</button>
-        <h4 class="col">: {{like}}</h4>
-    </div>
+  <div class="col center">
+    <mat-label class="col">
+      댓글 : {{ comment_count }} 좋아요 : {{ like }}
+    </mat-label>
+    <button mat-icon-button color="primary" (click)="countUpLike()">
+      <mat-icon>thumb_up_alt</mat-icon>
+    </button>
+  </div>
 </div>
 
-<br>
+<br />
 <div>
-    <h3 class="text-center">댓글</h3>
-    <form (ngSubmit)="addComment('co')">
-        <div class="row">
-            <div class="col-2">
-            </div>
-            <div class="col-7">
-                <textarea class="form-control" rows="2" [(ngModel)]="comment_content"
-                    [ngModelOptions]="{ standalone: true }"></textarea>
-            </div>
-            <div class="col-2">
-                <input type="submit" class="btn btn-secondary" value="댓글 입력">
-            </div>
-        </div>
-    </form>
+  <h3 class="text-center">댓글</h3>
+  <form (ngSubmit)="addComment('co')">
+    <div class="row">
+      <div class="col-2"></div>
+      <div class="col-7">
+        <textarea class="form-control" rows="2" [(ngModel)]="comment_content"
+          [ngModelOptions]="{ standalone: true }"></textarea>
+      </div>
+      <div class="col-2">
+        <input type="submit" class="btn btn-secondary" value="댓글 입력" />
+      </div>
+    </div>
+  </form>
 </div>
 
 <div>
-    <div *ngFor="let list1 of commentList; let i=index">
-        {{list1.writer}} &nbsp; {{list1.contents}} &nbsp; {{dateString(list1.comment_date)}} &nbsp; 추천: {{list1.like}}
-        <button *ngIf='list1.commentType=="co"' (click)="commentLike(list1._id)">추천</button>
-        <button *ngIf='list1.writer==nicknameCheck' (click)="commentDelete(list1._id,list1.writer)">삭제</button>
-        <!-- 대댓글 기능 미완성으로 비활성화 -->
-        <!-- <form (ngSubmit)="addReComment(list1._id,'re')">
+  <div *ngFor="let list1 of commentList; let i = index">
+    {{ list1.writer }} &nbsp; {{ list1.contents }} &nbsp;
+    {{ dateString(list1.comment_date) }} &nbsp; 추천: {{ list1.like }}
+    <button *ngIf="list1.commentType == 'co'" (click)="commentLike(list1._id)">
+      추천
+    </button>
+    <button *ngIf="list1.writer == nicknameCheck" (click)="commentDelete(list1._id, list1.writer)">
+      삭제
+    </button>
+    <!-- 대댓글 기능 미완성으로 비활성화 -->
+    <!-- <form (ngSubmit)="addReComment(list1._id,'re')">
             <input type="text" [(ngModel)]="comment_re" [ngModelOptions]="{ standalone: true }">
             <input type="submit" class="btn btn-secondary" value="댓글 입력">
         </form>
@@ -68,5 +74,5 @@
             {{list2.like}}
             <button *ngIf='list2.writer==nicknameCheck' (click)="commentDelete(list2._id,list2.writer)">삭제</button>
         </div> -->
-    </div>
+  </div>
 </div>
