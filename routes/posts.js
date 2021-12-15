@@ -2,6 +2,7 @@ const express = require('express');
 const config = require('../config/database');
 const router = express.Router();
 const Article = require('../models/article');
+const Comment = require('../models/comment');
 const mongoose = require('mongoose');
 
 // 기사 보기
@@ -110,6 +111,52 @@ router.post('/likeUp', (req, res) => {
     });
 });
 
+router.post('/addComment', (req, res) => {
+    const comment_date = new Date();
+    const newComment = new Comment({
+        comment_date: comment_date,
+        writer: req.body.writer,
+        target: req.body.target,
+        contents: req.body.contents,
+        like: 0,
+        commentType: 'co'
+    });
+    console.log(newComment);
+    newComment.save((err) => {
+        if (err) {
+            return res.json({ success: false, msg: "오류 발생1" });
+        } else {
+            const _id = mongoose.Types.ObjectId(String(req.body.target));
+            Article.findById(_id, (err, doc) => {
+                if (err) {
+                    return res.json({ success: false, msg: "오류 발생2" });
+                } else {
+                    doc.comment_count = doc.comment_count + 1;
+                    doc.save();
+                    return res.json({ success: true, msg: "댓글 추가됨" });
+                }
+            });
+        }
+    });
+});
 
+router.post('/commentView', async (req, res) => {
+    const _id = mongoose.Types.ObjectId(String(req.body._id));
+    let list = await Comment.find({ target: _id, commentType: 'co' });
+    for (var i in list) {
+        list[i].re = [];
+        for (reComment of list[i].commentList) {
+            const re_id = mongoose.Types.ObjectId(String(reComment));
+            Comment.findById(re_id, (err, doc) => {
+                if (err) {
+                    return res.json({ success: false, msg: "대댓 오류 발생" });
+                } else {
+                    list[i].re.push(doc);
+                }
+            });
+        }
+    }
+    return res.json({ commentList: list });
+});
 
 module.exports = router;

@@ -44,11 +44,20 @@ export class PostService {
     return this.http.post(registerUrl, { company: company, category: category }, httpOptions);
   }
 
-  //기사 좋아요
+  // 기사 좋아요
   postLike(_id, nickname): Observable<any> {
     const registerUrl = this.prepEndPoint('posts/likeUp');
     return this.http.post(registerUrl, { _id: _id, nickname: nickname }, httpOptions);
   }
 
+  // 댓글 추가
+  addComment(comment): Observable<any> {
+    const registerUrl = this.prepEndPoint('posts/addComment');
+    return this.http.post(registerUrl, comment, httpOptions);
+  }
 
+  commentView(_id): Observable<any> {
+    const registerUrl = this.prepEndPoint('posts/commentView');
+    return this.http.post(registerUrl, { _id: _id }, httpOptions);
+  }
 }

@@ -30,6 +30,10 @@ export class PostViewComponent implements OnInit {
   comment_count: number;
   newspaper_company: string;
 
+  comment_content: string;
+
+  commentList: any;
+
   ngOnInit(): void {
     //get 파라미터 받아오기 - json으로 출력
     this.activateRoute.queryParams.subscribe((params) => {
@@ -53,6 +57,9 @@ export class PostViewComponent implements OnInit {
       });
     });
 
+    this.postService.commentView(this.postId).subscribe((data) => {
+      this.commentList = data.commentList;
+    });
 
   }
 
@@ -87,4 +94,26 @@ export class PostViewComponent implements OnInit {
     }
   }
 
+  addComment() {
+    if (this.authService.loggedIn()) {
+      this.authService.getProfile().subscribe((data) => {
+        const comment = {
+          contents: this.comment_content,
+          writer: data.user.nickname,
+          target: this.postId
+        }
+        this.postService.addComment(comment).subscribe((data) => {
+          if (data.success) {
+            //this.flashMessage.show(data.msg, { cssClass: 'alert-success', timeout: 3000 });
+            location.reload();
+          } else {
+            this.flashMessage.show(data.msg, { cssClass: 'alert-danger', timeout: 3000 });
+            location.reload();
+          }
+        });
+      });
+    } else {
+      this.flashMessage.show('로그인이 필요합니다.', { cssClass: 'alert-danger', timeout: 3000 });
+    }
+  }
 }

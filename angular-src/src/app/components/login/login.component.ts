@@ -39,7 +39,8 @@ export class LoginComponent implements OnInit {
         if (data.success) {
           console.log(data);
           this.authService.storeUserData(data.token, data.user);
-          this.router.navigate(['/']);
+          //this.router.navigate(['/']);
+          window.history.back();
         } else {
           // 로그인 정보에 문제가 있을 때
           this.flashMessage.show(data.msg, { cssClass: 'alert-danger', timeout: 3000 });
