@@ -61,4 +61,4 @@ Article.test = function () { }
 
 
 
-module.exports = Article
+module.exports = Article;
