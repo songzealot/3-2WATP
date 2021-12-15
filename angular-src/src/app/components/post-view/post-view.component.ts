@@ -111,6 +111,7 @@ export class PostViewComponent implements OnInit {
     if (this.authService.loggedIn()) {
       this.authService.getProfile().subscribe((data) => {
         let contents_temp;
+        console.log(type);
         if (type == 'co') {
           contents_temp = this.comment_content
         } else if (type == 're') {
@@ -125,7 +126,7 @@ export class PostViewComponent implements OnInit {
         this.postService.addComment(comment).subscribe((data) => {
           if (data.success) {
             //this.flashMessage.show(data.msg, { cssClass: 'alert-success', timeout: 3000 });
-            //location.reload();
+            location.reload();
             //return data.comment._id;
           } else {
             this.flashMessage.show(data.msg, { cssClass: 'alert-danger', timeout: 3000 });
