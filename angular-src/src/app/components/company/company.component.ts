@@ -27,7 +27,6 @@ export class CompanyComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRouter.queryParams.subscribe((params) => {
-      console.log(params);
       if (!params.company) {
         this.flashMessage.show("잘못된 접근", { cssClass: 'alert-danger', timeout: 3000 });
         this.router.navigate(['/']);
