@@ -93,5 +93,10 @@ export class AuthService {
     const profileUrl = this.prepEndPoint('users/goSubscribe');
     return this.http.post(profileUrl, forSub, httpOptions);
   }
+
+  unSubscribe(forSub): Observable<any> {
+    const profileUrl = this.prepEndPoint('users/unSubscribe');
+    return this.http.post(profileUrl, forSub, httpOptions);
+  }
 }
 

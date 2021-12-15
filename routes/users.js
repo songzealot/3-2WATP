@@ -178,4 +178,26 @@ router.post('/goSubscribe', (req, res) => {
     });
 });
 
+//구독 취소
+router.post('/unSubscribe', (req, res) => {
+    User.findOne({ username: req.body.username }, (err, doc) => {
+        if (err) {
+            console.log(err);
+            return res.json({ success: false, msg: '조회 오류 발생' });
+        } else {
+            if (doc) {
+                if (req.body.type == 'reporter') {
+                    doc.subscribe_rep.splice(doc.subscribe_rep.indexOf(req.body.value), 1);
+                } else if (req.body.type == 'company') {
+                    doc.subscribe_rep.splice(doc.subscribe_com.indexOf(req.body.value), 1);
+                }
+                doc.save();
+                return res.json({ success: true, msg: '구독 취소' });
+            } else {
+                return res.json({ success: false, msg: '해당 사용자 없음' });
+            }
+        }
+    });
+});
+
 module.exports = router;
