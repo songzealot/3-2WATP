@@ -58,11 +58,17 @@ router.post('/register', (req, res) => {
         if (user) {
             return res.json({ success: false, msg: "같은 ID 존재" });
         } else {
-            User.addUser(newUser, (err, user) => {
-                if (err) {
-                    res.json({ success: false, msg: '회원가입 실패' });
+            User.find({ nickname: req.body.nickname }, (err, doc) => {
+                if (doc) {
+                    return res.json({ success: false, msg: "같은 닉네임 존재" });
                 } else {
-                    res.json({ success: true, msg: '회원가입 완료' });
+                    User.addUser(newUser, (err, user) => {
+                        if (err) {
+                            res.json({ success: false, msg: '회원가입 실패' });
+                        } else {
+                            res.json({ success: true, msg: '회원가입 완료' });
+                        }
+                    });
                 }
             });
         }
@@ -124,13 +130,17 @@ router.post('/reporterInfo', (req, res) => {
             console.log(err);
             return res.json({ success: false, msg: '조회 오류 발생' });
         } else {
-            return res.json({ success: true, reporter: doc, msg: '기자 조회됨' });
+            if (doc) {
+                return res.json({ success: true, reporter: doc, msg: '기자 조회됨' });
+            } else {
+                return res.json({ success: false, msg: '해당 사용자 없음' });
+            }
         }
     });
 });
 
 router.post('/updateUser', (req, res) => {
-    User.find({ username: req.body.username }, (err, doc) => {
+    User.findOne({ username: req.body.username }, (err, doc) => {
         if (err) {
             console.log(err);
             return res.json({ success: false, msg: '조회 오류 발생' });
@@ -138,6 +148,30 @@ router.post('/updateUser', (req, res) => {
             if (doc) {
                 doc.save();
                 return res.json({ success: true, msg: '사용자 정보 수정됨' });
+            } else {
+                return res.json({ success: false, msg: '해당 사용자 없음' });
+            }
+        }
+    });
+});
+
+//구독
+router.post('/goSubscribe', (req, res) => {
+    console.log(req.body);
+    User.findOne({ username: req.body.username }, (err, doc) => {
+        if (err) {
+            console.log(err);
+            return res.json({ success: false, msg: '조회 오류 발생' });
+        } else {
+            if (doc) {
+                if (req.body.type == 'reporter') {
+                    console.log(doc);
+                    doc.subscribe_rep.push(req.body.value);
+                } else if (req.body.type == 'company') {
+                    doc.subscribe_com.push(req.body.value);
+                }
+                doc.save();
+                return res.json({ success: true, msg: '구독' });
             } else {
                 return res.json({ success: false, msg: '해당 사용자 없음' });
             }
