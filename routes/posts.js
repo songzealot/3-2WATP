@@ -215,7 +215,22 @@ router.post('/commentDelete', (req, res) => {
     });
 });
 
+// 대댓 미완
 router.post('/addCommentList', (req, res) => {
 
 })
+
+// 회사별 기사 수
+router.post('/postCount', async (req, res) => {
+    let count = [];
+    count[0] = await Article.count({ newspaper_company: req.body.company });
+    count[1] = await Article.count({ newspaper_company: req.body.company, category: '정치' });
+    count[2] = await Article.count({ newspaper_company: req.body.company, category: '경제' });
+    count[3] = await Article.count({ newspaper_company: req.body.company, category: '사회' });
+    count[4] = await Article.count({ newspaper_company: req.body.company, category: '생활/문화' });
+    count[5] = await Article.count({ newspaper_company: req.body.company, category: '세계' });
+    count[6] = await Article.count({ newspaper_company: req.body.company, category: 'IT/과학' });
+    return res.json({ count: count });
+});
+
 module.exports = router;

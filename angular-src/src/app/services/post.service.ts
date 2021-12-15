@@ -70,4 +70,9 @@ export class PostService {
     const registerUrl = this.prepEndPoint('posts/commentDelete');
     return this.http.post(registerUrl, { _id: _id }, httpOptions);
   }
+
+  postCount(company): Observable<any> {
+    const registerUrl = this.prepEndPoint('posts/postCount');
+    return this.http.post(registerUrl, { company: company }, httpOptions);
+  }
 }
