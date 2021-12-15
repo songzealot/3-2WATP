@@ -46,38 +46,50 @@
 
 <br />
 <div>
-  <h3 class="text-center">댓글</h3>
   <form (ngSubmit)="addComment('co')">
-    <div class="row">
-      <div class="col-2"></div>
-      <div class="col-7">
+     
+    <mat-form-field appearance="fill" style="min-width: 1000px; display: inline-block;">
+        <mat-label>댓글</mat-label>
         <textarea
-          class="form-control"
-          rows="2"
+          matInput
           [(ngModel)]="comment_content"
           [ngModelOptions]="{ standalone: true }"
-        ></textarea>
-      </div>
-      <div class="col-2">
-        <input type="submit" class="btn btn-secondary" value="댓글 입력" />
-      </div>
-    </div>
+          cdkTextareaAutosize
+          cdkAutosizeMinRows="3"
+          cdkAutosizeMaxRows="5">
+        </textarea>
+        <button type="submit" color="primary" mat-raised-button style="display: inline-block;">
+            댓글입력
+          </button>
+      </mat-form-field>
+      <br />
+      
+  
   </form>
 </div>
 
 <div>
   <div *ngFor="let list1 of commentList; let i = index">
-    {{ list1.writer }} &nbsp; {{ list1.contents }} &nbsp;
+    <mat-card>
+    작성자:{{ list1.writer }} 
+    <br />
+    {{ list1.contents }}
+    <br />
     {{ dateString(list1.comment_date) }} &nbsp; 추천: {{ list1.like }}
-    <button *ngIf="list1.commentType == 'co'" (click)="commentLike(list1._id)">
-      추천
+    <button 
+    *ngIf="list1.commentType == 'co'" 
+    (click)="commentLike(list1._id)" 
+    mat-icon-button color="warn">
+        <mat-icon>favorite</mat-icon>
     </button>
-    <button
-      *ngIf="list1.writer == nicknameCheck"
-      (click)="commentDelete(list1._id, list1.writer)"
-    >
-      삭제
+    <button 
+    *ngIf="list1.writer == nicknameCheck"
+    (click)="commentDelete(list1._id, list1.writer)"
+    mat-icon-button color="primary">
+    <mat-icon>delete_forever</mat-icon>
     </button>
+    </mat-card>
+   
     <!-- 대댓글 기능 미완성으로 비활성화 -->
     <!-- <form (ngSubmit)="addReComment(list1._id,'re')">
             <input type="text" [(ngModel)]="comment_re" [ngModelOptions]="{ standalone: true }">
