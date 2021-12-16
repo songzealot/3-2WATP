@@ -25,9 +25,9 @@ export class AuthService {
   //개발/서버 동작 시 라우팅 경로 변경
   prepEndPoint(ep) {
     //개발용
-    return 'http://localhost:3000/' + ep;
+    //return 'http://localhost:3000/' + ep;
     //서버 동작용
-    //return ep;
+    return ep;
   }
 
 
