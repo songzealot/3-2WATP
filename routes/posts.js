@@ -179,7 +179,7 @@ router.post('/commentLike', (req, res) => {
     });
 });
 
-// 댓삭
+// 댓삭 - 대댓 관련 미완
 router.post('/commentDelete', (req, res) => {
     const _id = mongoose.Types.ObjectId(String(req.body._id));
     Comment.findById(_id, (err, doc) => {

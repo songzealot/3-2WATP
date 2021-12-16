@@ -19,6 +19,8 @@ import { NewsListComponent } from './components/news-list/news-list.component';
 import { NewPostComponent } from './components/new-post/new-post.component';
 import { PostViewComponent } from './components/post-view/post-view.component';
 import { CompanyComponent } from './components/company/company.component';
+import { ReporterComponent } from './components/reporter/reporter.component';
+import { SubscribeComponent } from './components/subscribe/subscribe.component';
 import { MatCardModule } from '@angular/material/card';
 
 //angular material 모듈
@@ -51,6 +53,8 @@ import { MatSelectModule } from '@angular/material/select';
     NewPostComponent,
     PostViewComponent,
     CompanyComponent,
+    ReporterComponent,
+    SubscribeComponent,
     profileedit
   ],
 

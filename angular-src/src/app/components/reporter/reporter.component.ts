@@ -22,10 +22,9 @@ export class ReporterComponent implements OnInit {
   reporter: any;
   postList: any;
   count: any;
-  checkSub: boolean;
+  checkSub: any;
 
   ngOnInit(): void {
-
     this.activatedRouter.queryParams.subscribe((params) => {
       if (!params.r) {
         this.flashMessage.show("잘못된 접근", { cssClass: 'alert-danger', timeout: 3000 });
@@ -46,12 +45,12 @@ export class ReporterComponent implements OnInit {
         }
         this.postService.postCompany(temp).subscribe((data) => {
           this.postList = data.postList;
+          this.checkSubscribe().then((data) => this.checkSub = data);
         });
         this.getReporterInfo(params.r);
       }
     });
 
-    this.checkSubscribe();
 
   }
 
@@ -101,16 +100,36 @@ export class ReporterComponent implements OnInit {
     return this.authService.loggedIn();
   }
   // 구독 중인지 확인
+  // checkSubscribe() {
+  //   this.authService.getProfile().subscribe((data) => {
+  //     this.username = data.user.username;
+  //     if (data.user.subscribe_rep.includes(this.reporter.username)) {
+  //       this.checkSub = true;
+  //     } else {
+  //       this.checkSub = false;
+  //     }
+  //   });
+  //   console.log(this.checkSub);
+  // }
   checkSubscribe() {
-    this.authService.getProfile().subscribe((data) => {
-      this.username = data.user.username;
-      if (data.user.subscribe_rep.includes(this.reporter.username)) {
-        this.checkSub = true;
-      } else {
-        this.checkSub = false;
-      }
+    return new Promise((resolve, reject) => {
+      this.authService.getProfile().subscribe((data) => {
+        this.username = data.user.username;
+        if (data.user.subscribe_rep.includes(this.reporter.username)) {
+          resolve(true);
+        } else {
+          reject(false);
+        }
+      });
     });
   }
+
+  async chksub() {
+    this.checkSub = await this.checkSubscribe();
+  }
+
+
+
 
   goSubscribe() {
     if (this.checkLoggedIn()) {
@@ -119,7 +138,6 @@ export class ReporterComponent implements OnInit {
         value: this.reporter.nickname,
         username: this.username
       }
-      console.log(forSub);
       this.authService.goSubscribe(forSub).subscribe((data) => {
         if (data.success) {
           this.flashMessage.show(data.msg, { cssClass: 'alert-success', timeout: 3000 });
@@ -130,6 +148,26 @@ export class ReporterComponent implements OnInit {
       });
     } else {
       this.flashMessage.show('로그인이 필요합니다.', { cssClass: 'alert-danger', timeout: 3000 });
+    }
+  }
+
+  unSubscribe() {
+    if (this.checkLoggedIn()) {
+      let forSub = {
+        type: 'reporter',
+        value: this.reporter.nickname,
+        username: this.username
+      }
+      this.authService.unSubscribe(forSub).subscribe((data) => {
+        if (data.success) {
+          this.flashMessage.show(data.msg, { cssClass: 'alert-success', timeout: 3000 });
+          location.reload();
+        } else {
+          this.flashMessage.show(data.msg, { cssClass: 'alert-danger', tiemout: 3000 });
+        }
+      });
+    } else {
+      this.flashMessage.show('잘못된 접근', { cssClass: 'alert-danger', timeout: 3000 });
     }
   }
 }

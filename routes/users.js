@@ -113,9 +113,25 @@ router.post('/reporterList', (req, res) => {
     });
 });
 
+//기자 정보 가져오기
+router.post('/reporterInfo', (req, res) => {
+    User.findOne({ username: req.body.username }, (err, doc) => {
+        if (err) {
+            console.log(err);
+            return res.json({ success: false, msg: '조회 오류 발생' });
+        } else {
+            if (doc) {
+                return res.json({ success: true, reporter: doc, msg: '기자 조회됨' });
+            } else {
+                return res.json({ success: false, msg: '해당 사용자 없음' });
+            }
+        }
+    });
+});
+
 //유저 업데이트
 router.post('/updateUser', (req, res) => {
-    User.find({ username: req.body.username }, (err, doc) => {
+    User.findOne({ username: req.body.username }, (err, doc) => {
         if (err) {
             console.log(err);
             return res.json({ success: false, msg: '조회 오류 발생' });
@@ -130,8 +146,6 @@ router.post('/updateUser', (req, res) => {
     });
 });
 
-<<<<<<< HEAD
-=======
 //구독
 router.post('/goSubscribe', (req, res) => {
     User.findOne({ username: req.body.username }, (err, doc) => {
@@ -154,6 +168,27 @@ router.post('/goSubscribe', (req, res) => {
         }
     });
 });
->>>>>>> 86e53e996083198a0b579da1b7564e49bc705f09
+
+//구독 취소
+router.post('/unSubscribe', (req, res) => {
+    User.findOne({ username: req.body.username }, (err, doc) => {
+        if (err) {
+            console.log(err);
+            return res.json({ success: false, msg: '조회 오류 발생' });
+        } else {
+            if (doc) {
+                if (req.body.type == 'reporter') {
+                    doc.subscribe_rep.splice(doc.subscribe_rep.indexOf(req.body.value), 1);
+                } else if (req.body.type == 'company') {
+                    doc.subscribe_rep.splice(doc.subscribe_com.indexOf(req.body.value), 1);
+                }
+                doc.save();
+                return res.json({ success: true, msg: '구독 취소' });
+            } else {
+                return res.json({ success: false, msg: '해당 사용자 없음' });
+            }
+        }
+    });
+});
 
 module.exports = router;

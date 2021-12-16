@@ -4,7 +4,7 @@
 
 <br /><br />
 <div *ngIf="checkSub">
-    test
+    <button class="btn btn-danger" (click)="unSubscribe()">구독 취소</button>
 </div>
 <div *ngIf="!checkSub">
     <button class="btn btn-info" (click)="goSubscribe()">구독</button>

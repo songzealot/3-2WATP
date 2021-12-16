@@ -38,7 +38,9 @@
     <mat-label class="col">
       댓글 : {{ comment_count }} 좋아요 : {{ like }}
     </mat-label>
-    <button mat-icon-button color="primary" (click)="countUpLike()">
+    <button mat-icon-button 
+    color="primary" 
+    (click)="countUpLike()">
       <mat-icon>thumb_up_alt</mat-icon>
     </button>
   </div>
@@ -70,24 +72,35 @@
 
 <div>
   <div *ngFor="let list1 of commentList; let i = index">
+    
     <mat-card>
+
     작성자:{{ list1.writer }} 
+
     <br />
+    <br />
+
     {{ list1.contents }}
+
     <br />
+    <br />
+
     {{ dateString(list1.comment_date) }} &nbsp; 추천: {{ list1.like }}
-    <button 
+    
+    <button mat-icon-button 
+    color="warn"
     *ngIf="list1.commentType == 'co'" 
-    (click)="commentLike(list1._id)" 
-    mat-icon-button color="warn">
-        <mat-icon>favorite</mat-icon>
+    (click)="commentLike(list1._id)">
+      <mat-icon>favorite</mat-icon>
     </button>
-    <button 
+
+    <button mat-icon-button 
+    color="primary"
     *ngIf="list1.writer == nicknameCheck"
-    (click)="commentDelete(list1._id, list1.writer)"
-    mat-icon-button color="primary">
-    <mat-icon>delete_forever</mat-icon>
+    (click)="commentDelete(list1._id, list1.writer)">
+      <mat-icon>delete_forever</mat-icon>
     </button>
+    
     </mat-card>
    
     <!-- 대댓글 기능 미완성으로 비활성화 -->
