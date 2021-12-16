@@ -40,4 +40,5 @@ export class HomeComponent implements OnInit {
   redirectPost(post_id) {
     this.router.navigate([`/postView`], { queryParams: { _id: post_id } });
   }
+  //아 멘탈;;
 }
