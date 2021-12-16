@@ -26,6 +26,7 @@ export class SubscribeComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.getProfile().subscribe((data) => {
+      console.log(data);
       this.postList_company = [];
       this.postList_reporter = [];
       this.subscribe_company = data.user.subscribe_com;
@@ -81,7 +82,11 @@ export class SubscribeComponent implements OnInit {
         .then()
     });
 
-    this.postList_reporter = await Promise.all(promises);
+    if (type == 'newspaper_company') {
+      this.postList_company = await Promise.all(promises);
+    } else if (type == 'reporter') {
+      this.postList_reporter = await Promise.all(promises);
+    }
     console.log(this.postList_reporter);
   }
 }

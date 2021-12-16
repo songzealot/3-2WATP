@@ -19,7 +19,9 @@ router.get('/profile', passport.authenticate("jwt", { session: false }), (req, r
                 age: req.user.age,
                 gender: req.user.gender,
                 status: req.user.status,
-                newspaper_company: req.user.newspaper_company
+                newspaper_company: req.user.newspaper_company,
+                subscribe_com: req.user.subscribe_com,
+                subscribe_rep: req.user.subscribe_rep
             }
         });
     } else {
@@ -29,7 +31,9 @@ router.get('/profile', passport.authenticate("jwt", { session: false }), (req, r
                 username: req.user.username,
                 age: req.user.age,
                 gender: req.user.gender,
-                status: req.user.status
+                status: req.user.status,
+                subscribe_com: req.user.subscribe_com,
+                subscribe_rep: req.user.subscribe_rep
             }
         });
     }
@@ -115,7 +119,7 @@ router.post('/reporterList', (req, res) => {
 
 //기자 정보 가져오기
 router.post('/reporterInfo', (req, res) => {
-    User.findOne({ username: req.body.username }, (err, doc) => {
+    User.findOne({ nickname: req.body.nickname }, (err, doc) => {
         if (err) {
             console.log(err);
             return res.json({ success: false, msg: '조회 오류 발생' });

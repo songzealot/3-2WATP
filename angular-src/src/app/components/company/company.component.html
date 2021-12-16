@@ -3,6 +3,12 @@
 <hr size="10px" />
 
 <br /><br />
+<div *ngIf="checkSub">
+  <button class="btn btn-danger" (click)="unSubscribe()">구독 취소</button>
+</div>
+<div *ngIf="!checkSub">
+  <button class="btn btn-info" (click)="goSubscribe()">구독</button>
+</div>
 
 <body class="bg-light">
   <div class="container">
@@ -81,7 +87,7 @@
               " *ngFor="let reporter of reporterList">
               <div>
                 <h6 class="my-0">
-                  <a class="nav-link link-dark" href="/reporter?r={{reporter.username}}" style="cursor: pointer">
+                  <a class="nav-link link-dark" href="/reporter?r={{reporter.nickname}}" style="cursor: pointer">
                     {{reporter.nickname}} - {{reporter.username}}
                   </a>
                 </h6>

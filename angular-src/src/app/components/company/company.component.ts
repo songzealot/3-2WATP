@@ -11,10 +11,12 @@ import { PostService } from 'src/app/services/post.service';
 })
 export class CompanyComponent implements OnInit {
 
+  username: string;
   newsCompany: string;
   postList: any;
   reporterList: any;
   count: any;
+  checkSub: any;
 
 
   constructor(
@@ -45,6 +47,7 @@ export class CompanyComponent implements OnInit {
         }
         this.postService.postCompany(temp).subscribe((data) => {
           this.postList = data.postList;
+          this.checkSubscribe().then((data) => this.checkSub = data);
         });
       }
     });
@@ -89,5 +92,62 @@ export class CompanyComponent implements OnInit {
     this.postService.postCount(temp).subscribe((data) => {
       this.count = data.count;
     });
+  }
+
+  checkLoggedIn(): boolean {
+    return this.authService.loggedIn();
+  }
+
+  checkSubscribe() {
+    return new Promise((resolve, reject) => {
+      this.authService.getProfile().subscribe((data) => {
+        this.username = data.user.username;
+        if (data.user.subscribe_com.includes(this.newsCompany)) {
+          resolve(true);
+        } else {
+          reject(false);
+        }
+      });
+    });
+  }
+
+  goSubscribe() {
+    if (this.checkLoggedIn()) {
+      let forSub = {
+        type: 'company',
+        value: this.newsCompany,
+        username: this.username
+      }
+      this.authService.goSubscribe(forSub).subscribe((data) => {
+        if (data.success) {
+          this.flashMessage.show(data.msg, { cssClass: 'alert-success', timeout: 3000 });
+          location.reload();
+        } else {
+          this.flashMessage.show(data.msg, { cssClass: 'alert-danger', tiemout: 3000 });
+        }
+      });
+    } else {
+      this.flashMessage.show('로그인이 필요합니다.', { cssClass: 'alert-danger', timeout: 3000 });
+    }
+  }
+
+  unSubscribe() {
+    if (this.checkLoggedIn()) {
+      let forSub = {
+        type: 'company',
+        value: this.newsCompany,
+        username: this.username
+      }
+      this.authService.unSubscribe(forSub).subscribe((data) => {
+        if (data.success) {
+          this.flashMessage.show(data.msg, { cssClass: 'alert-success', timeout: 3000 });
+          location.reload();
+        } else {
+          this.flashMessage.show(data.msg, { cssClass: 'alert-danger', tiemout: 3000 });
+        }
+      });
+    } else {
+      this.flashMessage.show('잘못된 접근', { cssClass: 'alert-danger', timeout: 3000 });
+    }
   }
 }

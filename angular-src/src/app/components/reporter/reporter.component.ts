@@ -115,7 +115,7 @@ export class ReporterComponent implements OnInit {
     return new Promise((resolve, reject) => {
       this.authService.getProfile().subscribe((data) => {
         this.username = data.user.username;
-        if (data.user.subscribe_rep.includes(this.reporter.username)) {
+        if (data.user.subscribe_rep.includes(this.reporter.nickname)) {
           resolve(true);
         } else {
           reject(false);

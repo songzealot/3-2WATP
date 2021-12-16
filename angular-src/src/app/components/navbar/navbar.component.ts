@@ -16,11 +16,11 @@ export class NavbarComponent implements OnInit {
   status: string;
 
   ngOnInit(): void {
-    this.router.events.subscribe((res) => {
-      this.activeLinkIndex = this.navLinks.indexOf(
-        this.navLinks.find((tab) => tab.link === '.' + this.router.url)
-      );
-    });
+    // this.router.events.subscribe((res) => {
+    //   this.activeLinkIndex = this.navLinks.indexOf(
+    //     this.navLinks.find((tab) => tab.link === '.' + this.router.url)
+    //   );
+    // });
 
     if (!this.checkLoggedIn()) {
       this.authService.logout();
