@@ -41,6 +41,11 @@ app.use("/users", users);
 app.use('/articles', articles);
 app.use('/posts', posts);
 
+// 폴백 처리
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, './public/index.html'));
+});
+
 // ---- 몽고DB ----
 // 몽고DB 연결
 mongoose.connect(dbConfig.db);
