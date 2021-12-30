@@ -27,7 +27,7 @@ const routes: Routes = [
   { path: 'postView', component: PostViewComponent },
   { path: 'newsCompany', component: CompanyComponent },
   { path: 'reporter', component: ReporterComponent },
-  { path: 'subscribe', component: SubscribeComponent }
+  { path: 'subscribe', component: SubscribeComponent, canActivate: [AuthGuard] }
 ];
 
 export const appRouting = RouterModule.forRoot(routes);
